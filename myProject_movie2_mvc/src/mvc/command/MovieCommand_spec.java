@@ -19,9 +19,14 @@ public class MovieCommand_spec implements MovieCommand{
 			MovieDto movie = mdao.movieSearchByCode(movieCode);
 			request.setAttribute("movie", movie);
 			System.out.println("MovieCommand_spec() end");
+		} catch(NullPointerException npe) {
+			System.out.println("MovieCommand_spec - NullPointerException");
+			npe.printStackTrace();
 		} catch (SQLException sqle) {
+			System.out.println("MovieCommand_spec - SQLException");
 			sqle.printStackTrace();
 		} catch (Exception e) {
+			System.out.println("MovieCommand_spec - Exception");
 			e.printStackTrace();
 		}		
 	}

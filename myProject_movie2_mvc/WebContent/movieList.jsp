@@ -5,14 +5,14 @@
 	System.out.println(">>movieList.jsp");
 	List<MovieDto> list = (List) request.getAttribute("movieList");
 	
-	int movieCode = 0;
-	String title = "";
-	String genre = "";
+	int movieCode	= 0;
+	String title	= "";
+	String genre	= "";
 	String director = "";
-	String actors = "";
+	String actors	= "";
 	int runningTime = 0;
-	String rating = "";
-	int score = 0;
+	String rating	= "";
+	int score		= 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -38,18 +38,17 @@
 <title>movie list</title>
 </head>
 <body>
-	<!-- <h3 style="text-align: right; margin-right: 150px;"><a href="./movieUpload.jsp">영화 신규등록하기</a></h3> -->
-	<h3 style="text-align: right; margin-right: 150px;"><a href="edit.do?movieCode=99999999">영화 신규등록하기</a></h3>
-	<% 
+	<h3 style="text-align: right; margin-right: 150px;"><a href="./edit.do?edit=1">영화 신규등록하기</a></h3>
+	<% 	
 		for(MovieDto movie : list){
-			movieCode = movie.getMovieCode();
-			title = movie.getTitle();
-			genre = movie.getGenre();
-			director = movie.getDirector();
-			actors = movie.getActors();
+			movieCode	= movie.getMovieCode();
+			title 		= movie.getTitle();
+			genre 		= movie.getGenre();
+			director 	= movie.getDirector();
+			actors 		= movie.getActors();
 			runningTime = movie.getRunningTime();
-			rating = movie.getRating();
-			score = movie.getScore();
+			rating 		= movie.getRating();
+			score 		= movie.getScore();
 	%>	
 
 	<table>	

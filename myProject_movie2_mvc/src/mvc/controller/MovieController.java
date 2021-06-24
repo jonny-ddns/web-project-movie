@@ -1,7 +1,6 @@
 package mvc.controller;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,12 +34,12 @@ public class MovieController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\ndoGet()");
+		System.out.println("\n>>doGet()");
 		actionDo(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost()");
+		System.out.println("\n>>doPost()");
 		actionDo(request, response);
 	}
 		
@@ -62,10 +61,10 @@ public class MovieController extends HttpServlet {
 		String contextPath;
 		
 		uri = request.getRequestURI();
-		System.out.println("getRequestURI : "+ uri);		
+//		System.out.println("getRequestURI : "+ uri);		
 		
 		contextPath = request.getContextPath();
-		System.out.println("getContextPath : "+ contextPath);
+//		System.out.println("getContextPath : "+ contextPath);
 		
 		command = uri.substring(contextPath.length()+1, uri.length()-3);
 		System.out.println("command : "+ command);		
@@ -93,18 +92,19 @@ public class MovieController extends HttpServlet {
 			System.out.println("MovieCommand_upload 호출");
 			com = new MovieCommand_upload();
 			com.execute(request, response);
-			viewPage = "./movieList.jsp";
+			viewPage = "./index.jsp";
 		}
 		else if(command.equals(movieUpdate)) {
 			System.out.println("MovieCommand_update 호출");
 			com = new MovieCommand_update();
 			com.execute(request, response);
 			command = movieList;
+			viewPage = "./index.jsp";
 		}
 		//페이지를 찾지 못함
 		else {
-			System.out.println("요청정보를 찾지못함");
-			viewPage = "";
+			System.out.println("--error : 요청정보를 찾지못함");
+			viewPage = "./movieList.jsp";
 		}				
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);

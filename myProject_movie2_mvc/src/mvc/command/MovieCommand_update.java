@@ -20,9 +20,14 @@ public class MovieCommand_update implements MovieCommand{
 			
 			mdao.movieEdit(movie, movieCodeBefore);			
 			System.out.println(">>MovieCommand_update() end");
-		} catch(SQLException sqle) {
+		} catch(NullPointerException npe) {
+			System.out.println("MovieCommand_update - NullPointerException");
+			npe.printStackTrace();
+		} catch (SQLException sqle) {
+			System.out.println("MovieCommand_update - SQLException");
 			sqle.printStackTrace();
 		} catch (Exception e) {
+			System.out.println("MovieCommand_update - Exception");
 			e.printStackTrace();
 		}
 	}

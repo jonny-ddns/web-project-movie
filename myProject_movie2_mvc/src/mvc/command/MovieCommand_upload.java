@@ -1,5 +1,7 @@
 package mvc.command;
 
+import java.sql.SQLException;
+
 //import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +20,15 @@ public class MovieCommand_upload implements MovieCommand{
 			MovieDto movie = (MovieDto) request.getAttribute("movie");
 			
 			mdao.movieInsert(movie);
-		}  catch (Exception e) {
+			System.out.println(">>MovieCommand_upload() end");
+		} catch (NullPointerException npe) {
+			System.out.println("MovieCommand_upload - NullPointerException");
+			npe.printStackTrace();
+		} catch (SQLException sqle) {
+			System.out.println("MovieCommand_upload - SQLException");
+			sqle.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("MovieCommand_upload - Exception");
 			e.printStackTrace();
 		}		
 	}

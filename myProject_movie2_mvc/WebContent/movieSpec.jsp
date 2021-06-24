@@ -13,7 +13,6 @@
 	int runningTime	= movie.getRunningTime();
 	String rating	= movie.getRating();
 	int score		= movie.getScore();
-	String moviePoster	= movie.getMoviePoster();	 
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +29,14 @@
 		border: 1px solid black;
 		border-collapse : collapse;
 	}
+	.th1{
+		background-color: gold;
+	}
+	.th2{
+		background-color: LemonChiffon;
+		border: 1px solid black;
+	}
+	
 	.td1{
 		width: 130px;
 		border: 1px solid black;
@@ -55,16 +62,10 @@
 	<h2>movie spec</h2>
 	
 	<table>
-	<tr class="tr1">
-		<td colspan="2">
-		<img class="img1" alt="이미지" src="./movieThumbImage/<%= moviePoster %>">
-		<%= content %>
-		</td>
-	</tr>
 	
 	<tr>
-		<td class="td1">TITLE</td>
-		<td class="td2"><%= title %></td>
+		<th class="th1">TITLE</th>
+		<th class="th2"><%= title %></th>
 	</tr>
 	<tr>
 		<td class="td1">Director</td>
@@ -94,7 +95,7 @@
 	
 	<br>
 	<div class="a1">	
-		<span><a href="./edit.do?movieCode=<%= movieCode %>">영화내용 수정하기</a></span>&emsp;&emsp;&emsp;
+		<span><a href="./edit.do?edit=2&movieCode=<%= movieCode %>">영화내용 수정하기</a></span>&emsp;&emsp;&emsp;
 		<span><a href="./list.do">목록으로 이동하기</a></span>
 	</div>
 </body>

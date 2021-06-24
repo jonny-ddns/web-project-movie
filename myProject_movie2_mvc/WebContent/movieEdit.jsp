@@ -1,8 +1,9 @@
 <%@page import="mvc.db.MovieDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 	System.out.println(">>movieEdit.jsp"); %>
-<%! 
-	int movieCodeBefore	= 99999999;
+<% 	
+	System.out.println(">>movieEdit.jsp");
+	int edit			= 0;
+	int movieCodeBefore	= 0;
 	int movieCode		= 0;
 	String title		= "";
 	String director		= "";
@@ -12,34 +13,41 @@
 	int runningTime		= 0;
 	String rating		= "";
 	int score			= 0;
-%>
-<% 
-	if(request.getParameter("movieCode") != null){
-		System.out.println("조건2 true");	
-		movieCode = Integer.parseInt(request.getParameter("movieCode")); //값을 가져와야 함
+	
+	//edit value check
+	if(request.getAttribute("edit") != null){
+		edit = (int) request.getAttribute("edit");	
 	}
 	
-	//기존 영화 수정이라면
-	if(movieCode != 99999999) {
-		System.out.println("조건3 true");	
+	if(edit == 0){
+		System.out.println("--parameter edit error");
+	} else if(edit == 1){		
+		System.out.println("new movie upload");
+	} else if(edit == 2){
+		System.out.println("existing movie update");
 		
-		MovieDto movie = (MovieDto) request.getAttribute("movie");
+		MovieDto movie = null;
 		
-		System.out.println("--출력 확인");
-		System.out.println(movie.getTitle());
-		System.out.println(movie.getActors());
-		System.out.println(movie.getRating());
+		if(request.getAttribute("movie") != null){
+			movie 			= (MovieDto) request.getAttribute("movie");	
+		}
+		if(request.getAttribute("movieCodeBefore") != null){
+			movieCodeBefore = (int) request.getAttribute("movieCodeBefore");
+		}		
+		if(movie == null || movieCodeBefore == 0){
+			System.out.println("--parameter movie or movieCodeBefore error");
+		}
 
-		movieCodeBefore = Integer.parseInt(request.getParameter("movieCode"));	
-		movieCode = movieCodeBefore;
-		String title = movie.getTitle();
-		String director = movie.getDirector();
-		String actors = movie.getActors();
-		String genre = movie.getGenre();
-		String content = movie.getContent();
-		int runningTime = movie.getRunningTime();
-		String rating = movie.getRating();
-		int score = movie.getScore();
+		//get movie element
+		movieCode 		= movieCodeBefore;
+		title 			= movie.getTitle();
+		director		= movie.getDirector();
+		actors 			= movie.getActors();
+		genre 			= movie.getGenre();
+		content 		= movie.getContent();
+		runningTime 	= movie.getRunningTime();
+		rating 			= movie.getRating();
+		score 			= movie.getScore();
 	}
 %>
 <!DOCTYPE html>
@@ -50,12 +58,9 @@
 </head>
 <body>
 	<h2>movie edit</h2>
-	<%-- <form action="./update.do?movieCodeBefore=<%= movieCodeBefore %> %>" method="post" enctype="multipart/form-data"> --%>
-	<%-- <form action="./movieEdit_process.jsp?movieCodeBefore=<%= movieCode %> %>" method="post"> --%>
-	<%-- <form action="./movieEdit_process.jsp?movieCodeBefore=<%= movieCodeBefore %>" method="post"> --%>
-	<form action="./movieEdit_process.jsp?movieCodeBefore=<%= movieCodeBefore %>" method="post">
+	<form action="./movieEdit_process.jsp?edit=<%= edit %>" method="post">
 		<div>
-			<input name="movieNew" type="hidden" value="">
+			<input name="movieCodeBefore" type="hidden" value="<%= movieCodeBefore %>">
 		</div>
 		<div>
 			<label>movieCode*</label>

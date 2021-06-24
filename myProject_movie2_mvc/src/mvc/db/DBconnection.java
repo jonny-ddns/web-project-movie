@@ -29,6 +29,8 @@ public class DBconnection {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, pass);
 			System.out.println("DB connected");
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
 		} catch(SQLException sqle) {
@@ -47,6 +49,8 @@ public class DBconnection {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, user, pass);
 			System.out.println("DB connected");
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
 			cnfe.printStackTrace();
 		} catch(SQLException sqle) {
