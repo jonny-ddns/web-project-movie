@@ -18,6 +18,9 @@
 <html>
 <head>
 <style type="text/css">
+	h1{
+		text-align: center;
+	}
 	h2{
 		text-align: center;
 	}
@@ -38,6 +41,7 @@
 <title>movie list</title>
 </head>
 <body>
+	<h1>movie list</h1>	
 	<h3 style="text-align: right; margin-right: 150px;"><a href="./edit.do?edit=1">영화 신규등록하기</a></h3>
 	<% 	
 		for(MovieDto movie : list){

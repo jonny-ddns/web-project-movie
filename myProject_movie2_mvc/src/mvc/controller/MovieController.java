@@ -104,7 +104,7 @@ public class MovieController extends HttpServlet {
 		//페이지를 찾지 못함
 		else {
 			System.out.println("--error : 요청정보를 찾지못함");
-			viewPage = "./movieList.jsp";
+			viewPage = "./index.jsp";
 		}				
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
