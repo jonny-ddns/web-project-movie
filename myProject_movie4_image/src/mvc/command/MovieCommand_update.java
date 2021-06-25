@@ -18,7 +18,8 @@ public class MovieCommand_update implements MovieCommand{
 			int movieCodeBefore	= (int) request.getAttribute("movieCodeBefore");
 			MovieDto movie		= (MovieDto) request.getAttribute("movie");
 			
-			mdao.movieEdit(movie, movieCodeBefore);			
+			mdao.movieEdit(movie, movieCodeBefore);		
+			request.setAttribute("movieCode", movieCodeBefore);
 			System.out.println(">>MovieCommand_update() end");
 		} catch(NullPointerException npe) {
 			System.out.println("MovieCommand_update - NullPointerException");

@@ -19,6 +19,9 @@ public class MovieCommand_upload implements MovieCommand{
 			MovieDao mdao = MovieDao.getInstance();			
 			MovieDto movie = (MovieDto) request.getAttribute("movie");
 			
+			int movieCode = movie.getMovieCode();
+			request.setAttribute("movieCode", movieCode);
+			
 			mdao.movieInsert(movie);
 			System.out.println(">>MovieCommand_upload() end");
 		} catch (NullPointerException npe) {

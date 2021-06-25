@@ -51,6 +51,8 @@
 		score 			= movie.getScore();
 		moviePosterBefore = movie.getMoviePoster();
 	}
+	
+	System.out.println("moviePosterBefore : "+ moviePosterBefore);
 %>
 <!DOCTYPE html>
 <html>
@@ -158,7 +160,7 @@
 							<input type="reset" value="Re">
 						</span>
 						<span class="span2">
-							<a href="./list.do">Input Cancel</a>
+							<a href="./list.do?">Input Cancel</a>
 						</span>
 					</div>
 				</td>	

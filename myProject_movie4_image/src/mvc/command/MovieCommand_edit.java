@@ -32,7 +32,6 @@ public class MovieCommand_edit implements MovieCommand {
 				int movieCodeBefore = 0;	
 				
 				if(request.getParameter("movieCode") != null) {
-					System.out.println("movieCode is not null");
 					movieCodeBefore	= Integer.parseInt(request.getParameter("movieCode"));
 					mdao			= MovieDao.getInstance();				
 					movie			= mdao.movieSearchByCode(movieCodeBefore);

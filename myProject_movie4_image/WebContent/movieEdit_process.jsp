@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%	
 	System.out.println(">>movieEdit_process.jsp");	
+	
 	request.setCharacterEncoding("UTF-8");
 	
 	//check if parameter edit is valid
@@ -16,12 +17,6 @@
 		System.out.println("parameter edit error");		
  	}
 	
-	String moviePosterBefore = "";
-	if(request.getParameter("moviePosterBefore") != null){
-		moviePosterBefore = request.getParameter("moviePosterBefore");
-	}
-	
-	
 	/*-----------------------------------------------------------------
 		upload image file from <form> by using "MultipartRequest"
 	-----------------------------------------------------------------*/
@@ -31,8 +26,17 @@
 	
 	Enumeration<?> files	= multi.getFileNames();
 	String fName			= (String) files.nextElement();
-	String moviePoster		= multi.getFilesystemName(fName);
+	String moviePoster		= multi.getFilesystemName(fName);	
 	
+	//기존 포스터 수정시 업로드된 파일이 없다면 기존파일 참고
+	String moviePosterBefore = "";
+	if(multi.getParameter("moviePosterBefore") != null){
+		moviePosterBefore = multi.getParameter("moviePosterBefore");
+	}	
+	if(moviePoster == null){
+		moviePoster = moviePosterBefore;
+	}
+
 	/*-----------------------------------------------------------------
 						apply <form> content
 	-----------------------------------------------------------------*/
@@ -47,12 +51,9 @@
 		 .setContent(multi.getParameter("content"))
 		 .setRunningTime(Integer.parseInt(multi.getParameter("runningTime")))		
 		 .setRating(multi.getParameter("rating"))
-		 .setScore(Integer.parseInt(multi.getParameter("score")));
+		 .setScore(Integer.parseInt(multi.getParameter("score")))
+		 .setMoviePoster(moviePoster);
 	
-	//인자값 moviePoster 변환코드. 기존 영화정보 수정인데, 파일을 첨부하지 않은 경우 기존 포스터를 참고함
-	if(moviePoster == null){
-		movie.setMoviePoster(moviePosterBefore);
-	}
 	request.setAttribute("movie", movie);	
 	
 	//edit의 인자값에 따른 분기	
@@ -60,7 +61,8 @@
 		System.out.println("new movie upload");			
 		dispatcher = request.getRequestDispatcher("upload.do");
 		dispatcher.forward(request, response);
-	} else if(edit == 2){
+	}
+	else if(edit == 2){
 		System.out.println("existing movie update");
 		int movieCodeBefore = Integer.parseInt(multi.getParameter("movieCodeBefore"));
 		request.setAttribute("movieCodeBefore", movieCodeBefore);		

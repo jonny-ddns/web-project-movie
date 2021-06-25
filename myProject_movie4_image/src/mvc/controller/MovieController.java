@@ -35,17 +35,17 @@ public class MovieController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\n>>doGet()");
+//		System.out.println("\n>>doGet()");
 		actionDo(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\n>>doPost()");
+//		System.out.println("\n>>doPost()");
 		actionDo(request, response);
 	}
 		
 	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("actionDo()");
+//		System.out.println("actionDo()");
 		MovieCommand com	= null;
 		String command		= "";
 		String viewPage		= "";		
@@ -94,20 +94,20 @@ public class MovieController extends HttpServlet {
 			System.out.println("MovieCommand_upload 호출");
 			com = new MovieCommand_upload();
 			com.execute(request, response);
-			viewPage = "./index.jsp";
+			int movieCode = (int) request.getAttribute("movieCode");
+			viewPage = "spec.do?movieCode="+ movieCode;
 		}
 		else if(command.equals(movieUpdate)) {
 			System.out.println("MovieCommand_update 호출");
 			com = new MovieCommand_update();
 			com.execute(request, response);
-			command = movieList;
-			viewPage = "./index.jsp";
+			int movieCode = (int) request.getAttribute("movieCode");
+			viewPage = "spec.do?movieCode="+ movieCode;
 		}
 		else if(command.equals(movieDelete)) {
 			System.out.println("MovieCommand_delete 호출");
 			com = new MovieCommand_delete();
 			com.execute(request, response);
-			command = movieList;
 			viewPage = "./index.jsp";
 		}
 		//페이지를 찾지 못함

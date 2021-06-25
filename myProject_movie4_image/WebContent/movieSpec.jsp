@@ -54,6 +54,7 @@
 		padding-right: 10px;
 		padding-bottom: 5px;
 		padding-left: 1px;
+		width: 100%;
 	}
 	.a1{
 		text-align: center;

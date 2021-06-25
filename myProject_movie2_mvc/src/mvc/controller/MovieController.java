@@ -49,14 +49,14 @@ public class MovieController extends HttpServlet {
 		String command		= "";
 		String viewPage		= "";		
 		
-		//controllerì—ì„œ ê±°ë¥¼ .do í˜ì´ì§€
+		//controller¿¡¼­ °Å¸¦ .do ÆäÀÌÁö
 		String movieList = "list";
 		String movieSpec = "spec";
 		String movieUpload = "upload";
 		String movieEdit = "edit";
 		String movieUpdate = "update";		
 		
-		//ì—°ê²°í•  ë‹¨ì–´ë¥¼ urlì—ì„œ ì¶”ì¶œí•˜ëŠ” ì ˆì°¨ 
+		//¿¬°áÇÒ ´Ü¾î¸¦ url¿¡¼­ ÃßÃâÇÏ´Â ÀıÂ÷ 
 		String uri = null;
 		String contextPath;
 		
@@ -69,45 +69,41 @@ public class MovieController extends HttpServlet {
 		command = uri.substring(contextPath.length()+1, uri.length()-3);
 		System.out.println("command : "+ command);		
 		
-		//MovieCommand êµ¬í˜„ì²´ í˜¸ì¶œí•´ì„œ ì—°ê²°í•˜ê¸°
+		//MovieCommand ±¸ÇöÃ¼ È£ÃâÇØ¼­ ¿¬°áÇÏ±â
 		if(command.equals(movieList)) {
-			System.out.println("MovieCommand_list í˜¸ì¶œ");
+			System.out.println("MovieCommand_list È£Ãâ");
 			com = new MovieCommand_list();
 			com.execute(request, response);
 			viewPage = "./movieList.jsp";
 		}
 		else if(command.equals(movieSpec)) {
-			System.out.println("MovieCommand_spec í˜¸ì¶œ");			
+			System.out.println("MovieCommand_spec È£Ãâ");			
 			com = new MovieCommand_spec();
 			com.execute(request, response);
 			viewPage = "./movieSpec.jsp";
 		}
 		else if(command.equals(movieEdit)) {
-			System.out.println("MovieCommand_edit í˜¸ì¶œ");
+			System.out.println("MovieCommand_edit È£Ãâ");
 			com = new MovieCommand_edit();
 			com.execute(request, response);
 			viewPage = "./movieEdit.jsp";
 		}		
 		else if(command.equals(movieUpload)) {
-			System.out.println("MovieCommand_upload í˜¸ì¶œ");
+			System.out.println("MovieCommand_upload È£Ãâ");
 			com = new MovieCommand_upload();
 			com.execute(request, response);
 			viewPage = "./index.jsp";
 		}
 		else if(command.equals(movieUpdate)) {
-			System.out.println("MovieCommand_update í˜¸ì¶œ");
+			System.out.println("MovieCommand_update È£Ãâ");
 			com = new MovieCommand_update();
 			com.execute(request, response);
 			command = movieList;
 			viewPage = "./index.jsp";
 		}
-		//í˜ì´ì§€ë¥¼ ì°¾ì§€ ëª»í•¨
+		//ÆäÀÌÁö¸¦ Ã£Áö ¸øÇÔ
 		else {
-<<<<<<< HEAD
 			System.out.println("--error : ¿äÃ»Á¤º¸¸¦ Ã£Áö¸øÇÔ");
-=======
-			System.out.println("--error : ìš”ì²­ì •ë³´ë¥¼ ì°¾ì§€ëª»í•¨");
->>>>>>> 8f258e15a45f0218a4e2c479d9b7c9d90eaa1abd
 			viewPage = "./index.jsp";
 		}				
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
