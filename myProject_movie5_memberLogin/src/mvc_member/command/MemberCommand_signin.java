@@ -2,7 +2,9 @@ package mvc_member.command;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import mvc_member.memberObject.MemberDao;
+import mvc_member.memberObject.MemberVO;
 
 public class MemberCommand_signin implements MemberCommand{
 	@Override
@@ -10,13 +12,21 @@ public class MemberCommand_signin implements MemberCommand{
 		System.out.println(">>MemberCommand_signin()");
 		
 		MemberDao mdao = MemberDao.getInstance();
+		HttpSession session	= null;
+		MemberVO member		= null;
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		
 		boolean isVerified = mdao.memberVerify(id, pw);
-		request.setAttribute("isVerified", isVerified);
 		
+		if(isVerified) {
+			member = mdao.memberSearchByID(id);
+			session = request.getSession();
+			session.setAttribute("memberLogin", member);
+		}
+		
+		request.setAttribute("isVerified", isVerified);
 		System.out.println(">>MemberCommand_signin() end");
 	}
 }

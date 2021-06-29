@@ -4,9 +4,15 @@
 	boolean isVerified = (boolean) request.getAttribute("isVerified");
 	String ment = "";
 	if(isVerified){
-		ment = "로그인 SUCCESS";
+		ment = "SIGN IN SUCCESS";
 	} else{
-		ment = "로그인 FAILURE";
+		ment = "SIGN IN FAILURE";
+	}	
+	
+	if(session.getAttribute("memberLogin") != null){
+		System.out.println("session yes");
+	} else {
+		System.out.println("session no");
 	}
 %>
 <!DOCTYPE html>
@@ -20,6 +26,5 @@
 	
 	<h2><%= ment %></h2>
 	<a href="../index.jsp">영화리스트로 이동</a>
-
 </body>
 </html>
