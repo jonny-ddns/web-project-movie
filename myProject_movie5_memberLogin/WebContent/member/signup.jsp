@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% 
+	System.out.println(">>signup.jsp");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -156,29 +158,29 @@
 			<tr>
 				<td>GENDER</td>
 				<td>
-					<input type="radio" name="male" value="man">남성
-					<input type="radio" name="female" value="man">여성
-					<input type="radio" name="other" value="man">기타
+					<input type="radio" name="gender" value="m">남성
+					<input type="radio" name="gender" value="f">여성
+					<input type="radio" name="gender" value="x">기타
 				</td>
 			</tr>			
 			<tr>
 				<td>INTEREST</td>
 				<td>
-					<input type="checkbox" name="action">액션<br>
-					<input type="checkbox" name="crime">범죄<br>
-					<input type="checkbox" name="mistery">미스터리<br>
-					<input type="checkbox" name="SF">SF<br>
-					<input type="checkbox" name="comedy">코미디<br>
-					<input type="checkbox" name="thriller">스릴러<br>
-					<input type="checkbox" name="horror">공포<br>
-					<input type="checkbox" name="war">전쟁물<br>
-					<input type="checkbox" name="sports">스포츠<br>
-					<input type="checkbox" name="fantasy">판타지<br>
-					<input type="checkbox" name="teenager">청춘물<br>
-					<input type="checkbox" name="drama">드라마<br>
-					<input type="checkbox" name="romantic">로맨스<br>
-					<input type="checkbox" name="music">음악<br>
-					<input type="checkbox" name="documentary">다큐멘터리<br>
+					<input type="checkbox" name="interest" value="action" >액션<br>
+					<input type="checkbox" name="interest" value="crime">범죄<br>
+					<input type="checkbox" name="interest" value="mistery">미스터리<br>
+					<input type="checkbox" name="interest" value="SF">SF<br>
+					<input type="checkbox" name="interest" value="comedy">코미디<br>
+					<input type="checkbox" name="interest" value="thriller">스릴러<br>
+					<input type="checkbox" name="interest" value="horror">공포<br>
+					<input type="checkbox" name="interest" value="war">전쟁물<br>
+					<input type="checkbox" name="interest" value="sports">스포츠<br>
+					<input type="checkbox" name="interest" value="fantasy">판타지<br>
+					<input type="checkbox" name="interest" value="teenager">청춘물<br>
+					<input type="checkbox" name="interest" value="drama">드라마<br>
+					<input type="checkbox" name="interest" value="romantic">로맨스<br>
+					<input type="checkbox" name="interest" value="music">음악<br>
+					<input type="checkbox" name="interest" value="documentary">다큐멘터리<br>
 				</td>
 			</tr>			
 			<tr>

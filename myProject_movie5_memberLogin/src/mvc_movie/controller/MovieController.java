@@ -22,24 +22,13 @@ public class MovieController extends HttpServlet {
        
     public MovieController() {
         super();
-        System.out.println(">>MovieController.servlet");
+//        System.out.println(">>MovieController.servlet");
     }
-    
-    @Override
-    public void init() throws ServletException {
-    	System.out.println("init()");
-    	super.init();
-    }
-	@Override
-	public void destroy() {
-		System.out.println("destroy()");
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		System.out.println("\n>>doGet()");
 		actionDo(request, response);
 	}
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		System.out.println("\n>>doPost()");
 		actionDo(request, response);
@@ -50,14 +39,6 @@ public class MovieController extends HttpServlet {
 		MovieCommand com	= null;
 		String command		= "";
 		String viewPage		= "";		
-		
-		//controller에서 거를 .do 페이지
-		String movieList = "list";
-		String movieSpec = "spec";
-		String movieEdit = "edit";
-		String movieUpload = "upload";
-		String movieUpdate = "update";
-		String movieDelete = "delete";	
 		
 		//연결할 단어를 url에서 추출하는 절차 
 		String uri = null;
@@ -73,39 +54,45 @@ public class MovieController extends HttpServlet {
 		System.out.println("command : "+ command);		
 		
 		//MovieCommand 구현체 호출해서 연결하기
-		if(command.equals(movieList)) {
+		//영화 리스트 페이지 요청
+		if(command.equals("list")) {
 			System.out.println("MovieCommand_list 호출");
 			com = new MovieCommand_list();
 			com.execute(request, response);
 			viewPage = "./movieList.jsp";
 		}
-		else if(command.equals(movieSpec)) {
+		//영화 상세 정보 페이지 요청
+		else if(command.equals("spec")) {
 			System.out.println("MovieCommand_spec 호출");			
 			com = new MovieCommand_spec();
 			com.execute(request, response);
 			viewPage = "./movieSpec.jsp";
 		}
-		else if(command.equals(movieEdit)) {
+		//영화 신규등록 페이지 요청. 혹은 영화수정 페이지 요청
+		else if(command.equals("edit")) {
 			System.out.println("MovieCommand_edit 호출");
 			com = new MovieCommand_edit();
 			com.execute(request, response);
 			viewPage = "./movieEdit.jsp";
-		}		
-		else if(command.equals(movieUpload)) {
+		}
+		//영화 upload 후 영화 상세페이지 요청
+		else if(command.equals("upload")) {
 			System.out.println("MovieCommand_upload 호출");
 			com = new MovieCommand_upload();
 			com.execute(request, response);
 			int movieCode = (int) request.getAttribute("movieCode");
 			viewPage = "spec.do?movieCode="+ movieCode;
 		}
-		else if(command.equals(movieUpdate)) {
+		//영화 update 후 영화 상세페이지 요청
+		else if(command.equals("update")) {
 			System.out.println("MovieCommand_update 호출");
 			com = new MovieCommand_update();
 			com.execute(request, response);
 			int movieCode = (int) request.getAttribute("movieCode");
 			viewPage = "spec.do?movieCode="+ movieCode;
 		}
-		else if(command.equals(movieDelete)) {
+		//영화 내용 삭제후 영화리스트 페이지 요청
+		else if(command.equals("delete")) {
 			System.out.println("MovieCommand_delete 호출");
 			com = new MovieCommand_delete();
 			com.execute(request, response);

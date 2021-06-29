@@ -1,6 +1,12 @@
 package mvc_member.memberObject;
 
+import java.util.List;
+
 public abstract class MemberDao_abstract {
+	public abstract List<MemberVO> getMemberAll();
+	
+	public abstract boolean memberVerify(String id, String pw); 
+	
 	public abstract void memberInsert(MemberVO member);
 	
 	public abstract MemberVO memberSearchByID(String id);

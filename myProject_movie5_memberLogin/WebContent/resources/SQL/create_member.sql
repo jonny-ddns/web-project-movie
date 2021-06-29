@@ -8,8 +8,8 @@ CREATE TABLE members (
     birthyear INT,
     gender CHAR(1),
     interest VARCHAR(50),
-    joinDate VARCHAR(20),
-    updateDate VARCHAR(20),
+    joinDate TIMESTAMP,
+    updateDate TIMESTAMP,
     isActive CHAR(1),
     
     PRIMARY KEY(id)

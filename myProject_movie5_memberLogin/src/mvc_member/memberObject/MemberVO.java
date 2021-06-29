@@ -2,10 +2,12 @@ package mvc_member.memberObject;
 
 import java.util.Date;
 
-public class MemberVO {	
+public class MemberVO {
+	
 	private String id;
-	private String name;
 	private String password;
+	private String name;
+	private String email;
 	private int birthyear; 
 	private String gender;
 	private String interest;
@@ -20,6 +22,13 @@ public class MemberVO {
 		this.id = id;
 		return this;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public MemberVO setPassword(String password) {
+		this.password = password;
+		return this;
+	}
 	public String getName() {
 		return name;
 	}
@@ -27,11 +36,11 @@ public class MemberVO {
 		this.name = name;
 		return this;
 	}
-	public String getPassword() {
-		return password;
+	public String getEmail() {
+		return email;
 	}
-	public MemberVO setPassword(String password) {
-		this.password = password;
+	public MemberVO setEmail(String email) {
+		this.email = email;
 		return this;
 	}
 	public int getBirthyear() {

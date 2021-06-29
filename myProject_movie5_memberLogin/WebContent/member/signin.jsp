@@ -4,13 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>login</title>
+<title>sign in</title>
 </head>
 <body>
-	<h1>log in</h1>
-	<form action="login.bo" method="post">
+	<h1>sign in</h1>
+	<form action="signin.bo" method="post">
 		<p>ID : <input type="text" name="id"></p>
-		<p>PW : <input type="password" name="id"></p>
+		<p>PW : <input type="password" name="pw"></p>
+		<input type="submit" value="Submit">
 	</form>
 </body>
 </html>
