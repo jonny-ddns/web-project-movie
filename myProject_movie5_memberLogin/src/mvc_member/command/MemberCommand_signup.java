@@ -12,6 +12,12 @@ public class MemberCommand_signup implements MemberCommand {
 		
 		MemberDao mdao = MemberDao.getInstance();
 		MemberVO member = new MemberVO();
+		
+		String[] interestArr = request.getParameterValues("interest");
+		String interest = "";
+		for(String st : interestArr) {
+			interest += st;
+		}	
 
 		member.setId(request.getParameter("id"))
 			  .setPassword(request.getParameter("pw"))
@@ -19,7 +25,7 @@ public class MemberCommand_signup implements MemberCommand {
 			  .setEmail(request.getParameter("email"))
 			  .setBirthyear(Integer.parseInt(request.getParameter("birthyear")))
 			  .setGender(request.getParameter("gender"))
-			  .setInterest(request.getParameter("interest"))
+			  .setInterest(interest)
 			  .setIsActive("y");	
 		mdao.memberInsert(member);
 		

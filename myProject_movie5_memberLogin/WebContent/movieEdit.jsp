@@ -98,6 +98,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="menu.jsp"></jsp:include>
 	<h2>movie edit</h2>
 	<form action="./movieEdit_process.jsp?edit=<%= edit %>" method="post" enctype="multipart/form-data">
 		<input name="movieCodeBefore" type="hidden" value="<%= movieCodeBefore %>">

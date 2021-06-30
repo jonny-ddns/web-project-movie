@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc_member.command.MemberCommand;
+import mvc_member.command.MemberCommand_pwCompare;
 import mvc_member.command.MemberCommand_signin;
 import mvc_member.command.MemberCommand_signup;
 
@@ -56,19 +57,13 @@ public class MemberController extends HttpServlet {
 			System.out.println("MemberCommand_signin 호출");
 			com = new MemberCommand_signin();
 			com.execute(request, response);
-			
-			boolean isVerified = (boolean) request.getAttribute("isVerified");
-			
-			if(!isVerified) {
-				System.out.println("로그인 실패");
-				request.setAttribute("isVerified", isVerified);
-			} else {
-				System.out.println("로그인 성공");
-				request.setAttribute("isVerified", isVerified);
-			}			
-		
-			
 			viewPage = "./signin_result.jsp";
+		}
+		else if(command.equals("compare")) {
+			System.out.println("MemberCommand_pwCompare 호출");
+			com = new MemberCommand_pwCompare();
+			com.execute(request, response);
+//			viewPage = "./signin_result.jsp";
 		}
 		else {
 			System.out.println("--페이지를 찾지 못함");

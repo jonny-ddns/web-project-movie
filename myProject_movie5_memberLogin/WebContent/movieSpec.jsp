@@ -63,6 +63,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="menu.jsp"></jsp:include>
 	<h2>movie spec</h2>	
 	<table>	
 	<tr>

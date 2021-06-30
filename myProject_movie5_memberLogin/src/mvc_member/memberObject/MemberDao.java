@@ -169,11 +169,10 @@ public class MemberDao extends MemberDao_abstract {
 		String sql = null;
 		
 		try {			
-			sql = "SELECT * FROM members WHERE ID = "+ id+ ";";
+			sql = "SELECT * FROM members WHERE id='"+ id+ "';";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
-
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -208,6 +207,54 @@ public class MemberDao extends MemberDao_abstract {
 			}
 		}
 		return member;
+	}
+	
+	
+	@Override
+	public boolean memberPwCompare(MemberVO member, String inputPw) {
+		System.out.println("MemberDao - memberPwCompare()");
+		boolean result = false;
+		String sql = null;
+		
+		String id = member.getId();
+		String pw = "";		
+		
+		try {			
+			sql = "SELECT * FROM members WHERE id='"+ id+ "';";
+			
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				pw = rs.getString("password");
+			}
+			if(inputPw.equals(pw)) {
+				System.out.println("비밀번호 일치");
+				result  = true;
+			} else {
+				System.out.println("비밀번호 불일치");
+			}			
+			System.out.println("memberPwCompare 완료");
+		} catch (NullPointerException npe) {
+			System.out.println("memberPwCompare - NullPointerException");
+			npe.printStackTrace();
+		} catch (SQLException sqle) {
+			System.out.println("memberPwCompare - SQLException");
+			sqle.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("memberPwCompare - Exception");
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) { rs.close(); }
+				if(pstmt != null) { pstmt.close(); }
+				if(conn != null) { conn.close(); }
+			} catch (SQLException sqle) {
+				sqle.getMessage();
+			}
+		}
+		return result;
 	}
 	
 	@Override
