@@ -7,10 +7,6 @@
 	String id = member.getId();
 	String name = member.getName();
 	String email = member.getEmail();
-	int birthyear = member.getBirthyear();
-	String gender = member.getGender();
-	String interest = member.getInterest();
-
 %>
 <!DOCTYPE html>
 <html>
@@ -21,23 +17,27 @@
 <body>
 	<h1>memberEdit form</h1>
 	
-	<form action="signup.bo" method="post">
+	<form action="memberEdit.bo" method="post">
 		<table>
 			<tr>
+				<td><input type="hidden" name="id" value="<%= id %>"></td>
+			</tr>
+			<tr>
 				<td>ID</td>
-				<td><input type="text" name="id" value="<%= %>" readonly="readonly"></td>
+				<td><input type="text" value="<%= id %>" readonly="readonly"></td>
+				
 			</tr>
 			<tr>
 				<td>PW</td>
-				<td><input type="password" name="pw" value="<%= %>"></td>
+				<td><input type="password" name="pw" ></td>
 			</tr>			
 			<tr>
 				<td>NAME</td>
-				<td><input type="text" name="name" value="<%= %>"></td>
+				<td><input type="text" name="name" value="<%= name %>"></td>
 			</tr>			
 			<tr>
 				<td>EMAIL</td>
-				<td><input type="text" name="email" value="<%= %>"></td>
+				<td><input type="text" name="email" value="<%= email %>"></td>
 			</tr>			
 			<tr>
 				<td>BIRTH</td>
@@ -193,17 +193,12 @@
 					<input type="checkbox" name="interest" value="music">음악<br>
 					<input type="checkbox" name="interest" value="documentary">다큐멘터리<br>
 				</td>
-			</tr>			
+			</tr>
 			<tr>
 				<td colspan="2"><input type="submit" value="Submit"></td>
 			</tr>			
 		</table>
-	</form>
-	
-	
-	
-	<a href="#">회원탈퇴하기</a>
-	
-
+	</form>	
+	<a href="memberDelete.bo?id=<%= id %>">회원탈퇴하기</a>
 </body>
 </html>

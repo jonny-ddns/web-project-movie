@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc_member.command.MemberCommand;
+import mvc_member.command.MemberCommand_memberDelete;
+import mvc_member.command.MemberCommand_memberEdit;
+import mvc_member.command.MemberCommand_memberView;
 import mvc_member.command.MemberCommand_pwCompare;
 import mvc_member.command.MemberCommand_signin;
 import mvc_member.command.MemberCommand_signup;
@@ -63,11 +66,33 @@ public class MemberController extends HttpServlet {
 			System.out.println("MemberCommand_pwCompare 호출");
 			com = new MemberCommand_pwCompare();
 			com.execute(request, response);
-//			viewPage = "./signin_result.jsp";
+			
+			viewPage = "./memberVerify.jsp";
+			if((boolean) request.getAttribute("compareResult")) {
+				viewPage = "./memberEdit_form.jsp";
+			}
+		}
+		else if(command.equals("memberEdit")) {
+			System.out.println("MemberCommand_memberEdit 호출");
+			com = new MemberCommand_memberEdit();
+			com.execute(request, response);
+			viewPage = "../index.jsp";
+		}
+		else if(command.equals("memberDelete")) {
+			System.out.println("MemberCommand_memberDelete 호출");
+			com = new MemberCommand_memberDelete();
+			com.execute(request, response);
+			viewPage = "../index.jsp";
+		}
+		else if(command.equals("memberView")) {
+			System.out.println("MemberCommand_memberView 호출");
+			com = new MemberCommand_memberView();
+			com.execute(request, response);
+			viewPage = "./memberView.jsp";
 		}
 		else {
 			System.out.println("--페이지를 찾지 못함");
-			viewPage = "./index.jsp";
+			viewPage = "../index.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

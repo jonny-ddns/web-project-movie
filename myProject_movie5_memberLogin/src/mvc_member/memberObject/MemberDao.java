@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import db.DBconnection;
 
@@ -28,12 +29,13 @@ public class MemberDao extends MemberDao_abstract {
 	@Override
 	public List<MemberVO> getMemberAll() {
 		System.out.println("MemberDao - getMemberAll()");
+		memberList = new ArrayList<>();
 		
 		String sql = null;
 		MemberVO member = null;
 		
 		try {			
-			sql = "SELECT * FROM members;";
+			sql = "SELECT * FROM members ORDER BY joinDate DESC;";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -207,8 +209,7 @@ public class MemberDao extends MemberDao_abstract {
 			}
 		}
 		return member;
-	}
-	
+	}	
 	
 	@Override
 	public boolean memberPwCompare(MemberVO member, String inputPw) {
@@ -263,17 +264,18 @@ public class MemberDao extends MemberDao_abstract {
 			
 		String sql = null;
 		try {			
-			sql = "UPDATE members SET name=?, password=?, birthyear=?, gender=?, interest=?, updateDate=now() WHERE id = ?;";
+			sql = "UPDATE members SET password=?, name=?, email=?, birthyear=?, gender=?, interest=?, updateDate=now() WHERE id = ?;";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, member.getName());
-			pstmt.setString(2, member.getPassword());
-			pstmt.setInt(3, member.getBirthyear());
-			pstmt.setString(4, member.getGender());
-			pstmt.setString(5, member.getInterest());
-			pstmt.setString(7, member.getId());		
+
+			pstmt.setString(1, member.getPassword());
+			pstmt.setString(2, member.getName());
+			pstmt.setString(3, member.getEmail());
+			pstmt.setInt(4, member.getBirthyear());
+			pstmt.setString(5, member.getGender());
+			pstmt.setString(6, member.getInterest());
+			pstmt.setString(7, id);		
 			pstmt.executeUpdate();
 			
 			System.out.println("memberEdit ¿Ï·á");
@@ -327,5 +329,4 @@ public class MemberDao extends MemberDao_abstract {
 			}
 		}		
 	}
-
 }
