@@ -7,10 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import mvc_movie.command.MovieCommand;
 import mvc_movie.command.MovieCommand_delete;
-import mvc_movie.command.MovieCommand_edit;
 import mvc_movie.command.MovieCommand_list;
 import mvc_movie.command.MovieCommand_spec;
 import mvc_movie.command.MovieCommand_update;
@@ -80,7 +78,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("MovieCommand_upload 호출");
 			com = new MovieCommand_upload();
 			com.execute(request, response);
-			int movieCode = (int) request.getAttribute("movieCode");
+//			int movieCode = (int) request.getAttribute("movieCode");
 //			viewPage = "spec.do?movieCode="+ movieCode;
 			viewPage = "./index.jsp";
 //			response.sendRedirect("spec.do?movieCode="+ movieCode);
@@ -90,12 +88,12 @@ public class MovieController extends HttpServlet {
 			System.out.println("MovieCommand_update 호출");
 			com = new MovieCommand_update();
 			
-			System.out.println("000");
+//			System.out.println("000");
 			com.execute(request, response);
 			
-			System.out.println("111");
-			int movieCode = (int) request.getAttribute("movieCode");
-			System.out.println("222");
+//			System.out.println("111");
+//			int movieCode = (int) request.getAttribute("movieCode");
+//			System.out.println("222");
 //			viewPage = "spec.do?movieCode="+ movieCode;
 		}
 		//영화 내용 삭제후 영화리스트 페이지 요청
