@@ -15,7 +15,7 @@ public class MovieCommand_delete implements MovieCommand{
 			System.out.println("MovieCommand_delete() end");
 		} catch(NullPointerException npe) {
 			System.out.println("MovieCommand_delete - NullPointerException");
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (Exception e) {
 			System.out.println("MovieCommand_delete - Exception");
 			e.printStackTrace();

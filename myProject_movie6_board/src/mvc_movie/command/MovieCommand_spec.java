@@ -20,7 +20,7 @@ public class MovieCommand_spec implements MovieCommand{
 			System.out.println("MovieCommand_spec() end");
 		} catch(NullPointerException npe) {
 			System.out.println("MovieCommand_spec - NullPointerException");
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (Exception e) {
 			System.out.println("MovieCommand_spec - Exception");
 			e.printStackTrace();

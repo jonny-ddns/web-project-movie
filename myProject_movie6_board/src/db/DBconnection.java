@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBconnection extends DBC{
+public class DBconnection {
 	
 	private DBconnection() {
 	}
@@ -24,14 +24,15 @@ public class DBconnection extends DBC{
 			conn = DriverManager.getConnection(url, user, pass);
 			System.out.println("DB connected");
 		} catch (NullPointerException npe) {
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
+			cnfe.getMessage();
 		} catch(SQLException sqle) {
-			sqle.printStackTrace();
+			sqle.getMessage();
 		} catch(Exception e) {
+			e.getMessage();
 			e.printStackTrace();
-		}		
+		}	
 		return conn;
 	}
 	
@@ -43,12 +44,13 @@ public class DBconnection extends DBC{
 			conn = DriverManager.getConnection(url, user, pass);
 			System.out.println("DB connected");
 		} catch (NullPointerException npe) {
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.printStackTrace();
+			cnfe.getMessage();
 		} catch(SQLException sqle) {
-			sqle.printStackTrace();
+			sqle.getMessage();
 		} catch(Exception e) {
+			e.getMessage();
 			e.printStackTrace();
 		}		
 		return conn;

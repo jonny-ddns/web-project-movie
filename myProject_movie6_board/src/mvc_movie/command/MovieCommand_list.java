@@ -17,7 +17,7 @@ public class MovieCommand_list implements MovieCommand{
 			System.out.println("MovieCommand_list() end");
 		} catch(NullPointerException npe) {
 			System.out.println("MovieCommand_list - NullPointerException");
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (Exception e) {
 			System.out.println("MovieCommand_list - Exception");
 			e.printStackTrace();

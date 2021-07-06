@@ -13,7 +13,7 @@
 	int runningTime	= movie.getRunningTime();
 	String rating	= movie.getRating();
 	int score		= movie.getScore();
-	String moviePoster	= movie.getMoviePoster();
+	String moviePoster	= movie.getMoviePoster();	
 %>
 <!DOCTYPE html>
 <html>
@@ -102,7 +102,8 @@
 	
 	<br>
 	<div class="a1">	
-		<span><a href="./movieForm_edit2.jsp">[내용 수정]</a></span>&emsp;&emsp;&emsp;
+		<!-- <span><a href="./edit.do">[내용 수정]</a></span>&emsp;&emsp;&emsp; -->
+		<span><a href="./edit.do?movieCode=<%= movieCode %>">[내용 수정]</a></span>&emsp;&emsp;&emsp;
 		<span><a href="./delete.do?movieCode=<%= movieCode %>">[영화 삭제]</a></span>&emsp;&emsp;&emsp;
 		<span><a href="./list.do">[목록 이동]</a></span>
 	</div>

@@ -15,8 +15,7 @@ public class MovieVO {
 	private int score;
 	private String moviePoster;
 	private Date registerDate;
-	private String isActive;
-	
+	private String isActive;	
 	
 	public int getMovieCode() {
 		return movieCode;

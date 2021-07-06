@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class BoardDao_abstract {
 
-	public abstract List<BoardVO> getboardAll();
+	public abstract List<BoardVO> getBoardAll();
 	
 	public abstract boolean boardVerify(String id, String pw); 
 	

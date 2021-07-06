@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieForm_edit.jsp");
+	
 	int edit			= 0;
 	int movieCodeBefore	= 0;
 	int movieCode		= 0;
@@ -15,46 +16,36 @@
 	int score			= 0;
 	String moviePosterBefore = "";
 	
-
-	if(edit == 0){
-		System.out.println("--parameter edit error");
-	} else if(edit == 1){		
-		System.out.println("new movie upload");
-	} else if(edit == 2){
-		System.out.println("existing movie update");
-		
-		MovieVO movie = null;
-		
-		if(request.getAttribute("movie") != null){
-	movie 			= (MovieVO) request.getAttribute("movie");	
-		}
-		if(request.getAttribute("movieCodeBefore") != null){
-	movieCodeBefore = (int) request.getAttribute("movieCodeBefore");
-		}		
-		if(movie == null || movieCodeBefore == 0){
-	System.out.println("--parameter movie or movieCodeBefore error");
-		}
-
-		//get movie element
-		movieCode 		= movieCodeBefore;
-		title 			= movie.getTitle();
-		director		= movie.getDirector();
-		actors 			= movie.getActors();
-		genre 			= movie.getGenre();
-		content 		= movie.getContent();
-		runningTime 	= movie.getRunningTime();
-		rating 			= movie.getRating();
-		score 			= movie.getScore();
-		moviePosterBefore = movie.getMoviePoster();
+	MovieVO movie = null;
+	
+	if(request.getAttribute("movie") != null){
+		movie = (MovieVO) request.getAttribute("movie");	
+	}
+	if(request.getParameter("movieCode") != null){
+		movieCodeBefore = Integer.parseInt(request.getParameter("movieCode"));
+	}		
+	if(movie == null || movieCodeBefore == 0){
+		System.out.println("[error] parameter movie or movieCodeBefore is null");
 	}
 	
-	System.out.println("moviePosterBefore : "+ moviePosterBefore);
+	movieCode 		= movieCodeBefore;
+	title 			= movie.getTitle();
+	director		= movie.getDirector();
+	actors 			= movie.getActors();
+	genre 			= movie.getGenre();
+	content 		= movie.getContent();
+	runningTime 	= movie.getRunningTime();
+	rating 			= movie.getRating();
+	score 			= movie.getScore();
+	moviePosterBefore = movie.getMoviePoster();
+	
+	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>movie edit</title>
+<title>movieForm edit</title>
 <style type="text/css">
 	h2{
 		text-align: center;
@@ -95,11 +86,8 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
-	<h2>movie edit</h2>
-	<form action="./movieEdit_process.jsp?edit=<%= edit %>" method="post" enctype="multipart/form-data">
-		<input name="movieCodeBefore" type="hidden" value="<%= movieCodeBefore %>">
-		<input name="moviePosterBefore" type="hidden" value="<%= moviePosterBefore %>">
-
+	<h2>movieForm edit</h2>
+	<form action="./update.do?movieCodeBefore=<%= movieCodeBefore %>&moviePosterBefore=<%= moviePosterBefore %>" method="post" enctype="multipart/form-data">
 		<table>			
 			<tr>
 				<td class="td1"><label>MovieCode*</label></td>
@@ -142,7 +130,7 @@
 				<td class="td1"><label>CONTENT</label></td>
 				<td class="td2">
 					<textarea class="textArea1" name="content" rows="16" cols="32">
-						<%= content %>
+						<%= content  %>
 					</textarea>
 				</td>
 			</tr>

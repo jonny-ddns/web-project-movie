@@ -42,7 +42,8 @@ public class MovieDao extends MovieDao_abstract{
 		String sql = null;
 		
 		try {			
-			sql = "SELECT * FROM movies WHERE isActive = 'y' ORDER BY registerDate DESC title ASC;";
+			sql = "SELECT * FROM movies WHERE isActive = 'y' ORDER BY registerDate DESC, title ASC;";
+//			sql = "SELECT * FROM movies WHERE isActive = 'y' ORDER BY registerDate DESC";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);

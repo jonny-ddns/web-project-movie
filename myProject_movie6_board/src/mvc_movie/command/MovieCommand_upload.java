@@ -49,7 +49,7 @@ public class MovieCommand_upload implements MovieCommand{
 			System.out.println("MovieCommand_upload() end");
 		} catch (NullPointerException npe) {
 			System.out.println("MovieCommand_upload - NullPointerException");
-			npe.printStackTrace();
+			npe.getMessage();
 		} catch (Exception e) {
 			System.out.println("MovieCommand_upload - Exception");
 			e.printStackTrace();

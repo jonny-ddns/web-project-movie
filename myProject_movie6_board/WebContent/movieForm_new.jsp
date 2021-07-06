@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieForm_new.jsp");
+
 	int edit			= 0;
 	int movieCodeBefore	= 0;
 	int movieCode		= 0;
@@ -19,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>movie edit</title>
+<title>movieForm New</title>
 <style type="text/css">
 	h2{
 		text-align: center;
@@ -60,7 +61,7 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
-	<h2>movie edit</h2>
+	<h2>movieForm New</h2>
 	<form action="./upload.do" method="post" enctype="multipart/form-data">
 		<table>			
 			<tr>
