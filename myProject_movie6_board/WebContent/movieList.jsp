@@ -42,6 +42,7 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
+	<a href="./list.co">게시판으로 이동</a>
 	<h1>movie list</h1>		
 	<h3 style="text-align: right; margin-right: 150px;"><a href="./movieForm_new.jsp">영화 신규등록하기</a></h3>
 	<%

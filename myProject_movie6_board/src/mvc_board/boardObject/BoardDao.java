@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import db.DBconnection;
 
@@ -13,7 +14,7 @@ public class BoardDao extends BoardDao_abstract {
 	private PreparedStatement pstmt 		= null;
 	private ResultSet rs					= null;
 	private static BoardDao boardDao		= null;
-	private List<BoardVO> boardList			= null;
+	private static List<BoardVO> boardList			= null;
 	
 	private BoardDao(){
 	}	
@@ -24,6 +25,15 @@ public class BoardDao extends BoardDao_abstract {
 		}
 		return boardDao;
 	}
+	
+	public static List<BoardVO> getBoardList() {
+		if(boardList == null) {
+			boardList = new ArrayList<BoardVO>();
+		}
+		return boardList;
+	}
+	
+	/*----------------------------------*/
 
 	@Override
 	public List<BoardVO> getBoardAll() {
@@ -34,6 +44,7 @@ public class BoardDao extends BoardDao_abstract {
 		BoardVO board	= null;
 		
 		try {
+			boardList = getBoardList();
 			sql = "SELECT * FROM board ORDER BY artiDate DESC;";
 			
 			conn = DBconnection.getConnection();

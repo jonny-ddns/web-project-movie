@@ -54,7 +54,15 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardCommand_list 호출");
 			com = new BoardCommand_list();
 			com.execute(request, response);
-			viewPage = "./temp.jsp";
+			
+			
+			//디버깅
+			if(request.getAttribute("boardList") == null) {
+				System.out.println("[error] parameter boardList is null");
+			}
+			
+			
+			viewPage = "./board/boardList.jsp";
 		} 
 		else if(command.equals("search")) {
 			System.out.println("BoardCommand_search 호출");
