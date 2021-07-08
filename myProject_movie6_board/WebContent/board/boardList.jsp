@@ -4,6 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	System.out.println(">>boardList.jsp");
+	String contextPath = request.getContextPath();	
+
 	List<BoardVO> boardList = null;
 	if(request.getAttribute("boardList") != null){
 		boardList = (List<BoardVO>) request.getAttribute("boardList");
@@ -12,6 +14,8 @@
 	Date artiDate = null;
 	String artiTitle = "";
 	String writer = "";
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -22,6 +26,8 @@
 <body>
 	<h1>board list</h1>
 	<h2>게시판 end</h2>
+	<h2><a href="<%= contextPath %>/board/boardWrite.jsp">글쓰기</a></h2>
+	
 	<% 
 		for(BoardVO board : boardList){
 			artiNum = board.getArtiNum();

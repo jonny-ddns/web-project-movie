@@ -45,7 +45,7 @@ public class BoardDao extends BoardDao_abstract {
 		
 		try {
 			boardList = getBoardList();
-			sql = "SELECT * FROM board ORDER BY artiDate DESC;";
+			sql = "SELECT * FROM board WHERE isActive='y' ORDER BY artiNum DESC;";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -94,26 +94,25 @@ public class BoardDao extends BoardDao_abstract {
 	}
 
 	@Override
-	public void boardInsert(BoardVO board) {
+	public void boardWrite(BoardVO board) {
 		System.out.println("BoardDao - boardInsert()");
 
 		String sql = null;
 		try {			
-			sql = "INSERT INTO board(artiNum, artiTitle, writer, artiDate, openPublic, image, content, isActive) "
-					+ "VALUES(?, ?, ?, now(), ?, ?, ?, ?);";
+			sql = "INSERT INTO board(artiTitle, writer, artiDate, openPublic, image, content, isActive) "
+					+ "VALUES(?, ?, now(), ?, ?, ?, ?);";
 			
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, board.getArtiNum());
-			pstmt.setString(2, board.getArtiTitle());
-			pstmt.setString(3, board.getWriter());
-			pstmt.setString(4, board.getOpenPublic());
-			pstmt.setString(5, board.getImage());
-			pstmt.setString(6, board.getContent());
-			pstmt.setString(7, board.getIsActive());
+			pstmt.setString(1, board.getArtiTitle());
+			pstmt.setString(2, board.getWriter());
+			pstmt.setString(3, board.getOpenPublic());
+			pstmt.setString(4, board.getImage());
+			pstmt.setString(5, board.getContent());
+			pstmt.setString(6, board.getIsActive());
 		
-			pstmt.executeUpdate();			
+			pstmt.executeUpdate();		
 			System.out.println("boardInsert ¿Ï·á");
 		} catch (NullPointerException npe) {
 			System.out.println("boardInsert - NullPointerException");
@@ -190,7 +189,8 @@ public class BoardDao extends BoardDao_abstract {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
+
 	
 
 }

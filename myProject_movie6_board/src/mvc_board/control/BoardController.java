@@ -13,6 +13,7 @@ import mvc_board.command.BoardCommand_list;
 import mvc_board.command.BoardCommand_read;
 import mvc_board.command.BoardCommand_search;
 import mvc_board.command.BoardCommand_update;
+import mvc_board.command.BoardCommand_upload;
 
 @WebServlet("*.co")
 public class BoardController extends HttpServlet {
@@ -36,34 +37,27 @@ public class BoardController extends HttpServlet {
 		BoardCommand com	= null;
 		String command		= "";
 		String viewPage		= "";		
-				
-		//연결할 단어를 url에서 추출하는 절차 
-		String uri = null;
-		String contextPath;
 		
-		uri = request.getRequestURI();
-//		System.out.println("getRequestURI : "+ uri);		
-		
-		contextPath = request.getContextPath();
-//		System.out.println("getContextPath : "+ contextPath);
-		
-		command = uri.substring(contextPath.length()+1, uri.length()-3);
+		/*
+		 * 이동할 path 생성하기
+		 * getRequestURI 로 가져온 값에서 '/'과 '.' 사이의 단어 추출하기
+		 */
+		String uri = request.getRequestURI();
+		System.out.println("getRequestURI : "+ uri);
+		command = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));		
 		System.out.println("command : "+ command);		
 		
+		//경로 설정
 		if(command.equals("list")) {
 			System.out.println("BoardCommand_list 호출");
 			com = new BoardCommand_list();
-			com.execute(request, response);
-			
-			
+			com.execute(request, response);						
 			//디버깅
 			if(request.getAttribute("boardList") == null) {
 				System.out.println("[error] parameter boardList is null");
-			}
-			
-			
-			viewPage = "./board/boardList.jsp";
-		} 
+			}			
+			viewPage = "./boardList.jsp";
+		}
 		else if(command.equals("search")) {
 			System.out.println("BoardCommand_search 호출");
 			com = new BoardCommand_search();
@@ -73,6 +67,12 @@ public class BoardController extends HttpServlet {
 		else if(command.equals("read")) {
 			System.out.println("BoardCommand_read 호출");
 			com = new BoardCommand_read();
+			com.execute(request, response);
+			viewPage = "./temp.jsp";
+		}
+		else if(command.equals("upload")) {
+			System.out.println("BoardCommand_read 호출");
+			com = new BoardCommand_upload();
 			com.execute(request, response);
 			viewPage = "./temp.jsp";
 		}
