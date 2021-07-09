@@ -58,14 +58,14 @@
 			</tr>
 			<tr>
 				<td class="tdTextarea" colspan="3">
-					<textarea name="textarea" rows="12" cols="60">
+					<textarea name="content" rows="12" cols="60">
 					</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td class="tdSelect">
 					주제
-					<select>
+					<select name="topic">
 						<option value="movie">영화</option>
 						<option value="hobby">취미</option>
 						<option value="life">일상</option>
@@ -73,7 +73,7 @@
 				</td>
 				<td class="tdSelect">
 					공개여부
-					<select>
+					<select name="openPublic">
 						<option value="y">공개</option>
 						<option value="n">비공개</option>
 					</select>
