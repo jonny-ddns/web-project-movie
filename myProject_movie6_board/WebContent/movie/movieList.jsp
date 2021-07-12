@@ -3,6 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieList.jsp");
+	String contextPath = request.getContextPath();
+
 	List<MovieVO> list = (List) request.getAttribute("movieList");
 	
 	int movieCode	= 0;
@@ -41,8 +43,7 @@
 <title>movie list</title>
 </head>
 <body>
-	<jsp:include page="menu.jsp"></jsp:include>
-	<a href="./list.co">게시판으로 이동</a>
+	<jsp:include page="/menu.jsp"></jsp:include>
 	<h1>movie list</h1>		
 	<h3 style="text-align: right; margin-right: 150px;"><a href="./movieForm_new.jsp">영화 신규등록하기</a></h3>
 	<%

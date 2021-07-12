@@ -10,13 +10,12 @@ import java.util.List;
 import mvc.db.DBconnection;
 import mvc.db.vo.BoardVO;
 
-public class BoardDao {
-	
+public class BoardDao {	
 	private Connection conn					= null;
 	private PreparedStatement pstmt 		= null;
 	private ResultSet rs					= null;
 	private static BoardDao boardDao		= null;
-	private static List<BoardVO> boardList			= null;
+	private static List<BoardVO> boardList	= null;
 	
 	private BoardDao(){
 	}	
@@ -25,6 +24,7 @@ public class BoardDao {
 		if(boardDao == null) {
 			boardDao = new BoardDao();
 		}
+		boardList = new ArrayList<BoardVO>();
 		return boardDao;
 	}
 	
@@ -36,15 +36,14 @@ public class BoardDao {
 	}
 	
 	/*----------------------------------*/
-	public List<BoardVO> getBoardAll() {
-		
+	public List<BoardVO> getBoardAll() {		
 		System.out.println("BoardDao - getBoardAll()");
 
 		String sql		= null;
-		BoardVO board	= null;
+		boardList = getBoardList();
 		
 		try {
-			boardList = getBoardList();
+			
 			sql = "SELECT * FROM board WHERE isActive='y' ORDER BY artiNum DESC;";
 			
 			conn = DBconnection.getConnection();
@@ -52,7 +51,7 @@ public class BoardDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
-				board = new BoardVO();
+				BoardVO board = new BoardVO();
 				
 				board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 					  .setArtiTitle(rs.getString("artiTitle"))
@@ -64,7 +63,7 @@ public class BoardDao {
 					  .setIsActive(rs.getString("isActive"));				
 				boardList.add(board);
 			}			
-			System.out.println("getBoardAll 완료");
+			System.out.println("getBoardAll - end");
 		} catch (NullPointerException npe) {
 			System.out.println("getBoardAll - NullPointerException");
 			npe.printStackTrace();
@@ -103,13 +102,6 @@ public class BoardDao {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			//디버깅
-//			System.out.println("--parameter 확인");
-//			System.out.println(board.getArtiTitle()); 
-//			System.out.println(board.getOpenPublic()); 
-//			System.out.println(board.getContent()); 
-			
-			
 			pstmt.setString(1, board.getArtiTitle());
 			pstmt.setString(2, board.getWriter());
 			pstmt.setString(3, board.getOpenPublic());
@@ -117,7 +109,7 @@ public class BoardDao {
 			pstmt.setString(5, board.getContent());
 		
 			pstmt.executeUpdate();		
-			System.out.println("boardWrite 완료");
+			System.out.println("boardWrite - end");
 		} catch (NullPointerException npe) {
 			System.out.println("boardWrite - NullPointerException");
 			npe.printStackTrace();
@@ -160,7 +152,7 @@ public class BoardDao {
 					 .setContent(rs.getString("content"))
 					 .setIsActive(rs.getString("isActive"));
 			}
-			System.out.println("boardSearchByArtiNum 완료");
+			System.out.println("boardSearchByArtiNum - end");
 		} catch (NullPointerException npe) {
 			System.out.println("boardSearchByArtiNum - NullPointerException");
 			npe.printStackTrace();
@@ -204,7 +196,7 @@ public class BoardDao {
 					 .setContent(rs.getString("content"))
 					 .setIsActive(rs.getString("isActive"));
 			}
-			System.out.println("boardSearchByID 완료");
+			System.out.println("boardSearchByID - end");
 		} catch (NullPointerException npe) {
 			System.out.println("boardSearchByID - NullPointerException");
 			npe.printStackTrace();

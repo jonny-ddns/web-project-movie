@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieForm_new.jsp");
+	String contextPath = request.getContextPath();
 
 	int edit			= 0;
 	int movieCodeBefore	= 0;
@@ -60,7 +61,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp"></jsp:include>
+	<jsp:include page="<%= contextPath %>/menu.jsp"></jsp:include>
 	<h2>movieForm New</h2>
 	<form action="./upload.do" method="post" enctype="multipart/form-data">
 		<table>			

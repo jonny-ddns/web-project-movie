@@ -40,19 +40,26 @@ public class MemberController extends HttpServlet {
 		MemberCommand com = null;
 		String command = "";
 		String viewPage = "";
+		
+		String contextPath = request.getContextPath();
+		
+		
+		String uri = request.getRequestURI();
+		System.out.println("getRequestURI : "+ uri);
+		command = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));		
+		System.out.println("command : "+ command);	
 				
 		//연결할 단어를 url에서 추출하는 절차 
-		String servletPath = request.getServletPath();
-		String folderName = "member";
-		
-		command = servletPath.substring(folderName.length()+2, servletPath.length()-3);
+//		String servletPath = request.getServletPath();
+//		String folderName = "member";
+//		
+//		command = servletPath.substring(folderName.length()+2, servletPath.length()-3);
 
-		System.out.println("command : "+ command);				
-		
 		if(command.equals("signup")) {
 			System.out.println("MemberCommand_signup 호출");
 			com = new MemberCommand_signup();
 			com.execute(request, response);
+//			viewPage = contextPath+"menu.jsp";
 			viewPage = "../index.jsp";
 		}
 		else if(command.equals("signin")) {

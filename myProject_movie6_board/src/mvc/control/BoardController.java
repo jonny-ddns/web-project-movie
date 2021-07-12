@@ -39,8 +39,7 @@ public class BoardController extends HttpServlet {
 		String command		= "";
 		String viewPage		= "";
 		
-		String contextPath = request.getContextPath();
-	
+//		String contextPath = request.getContextPath();	
 		
 		/*
 		 * 이동할 path 생성하기
@@ -60,7 +59,8 @@ public class BoardController extends HttpServlet {
 			if(request.getAttribute("boardList") == null) {
 				System.out.println("[error] parameter boardList is null");
 			}
-			viewPage = "./board/boardList.jsp";
+			viewPage = "./boardList.jsp";
+//			viewPage = "./board_temp.jsp";
 		}
 		else if(command.equals("search")) {
 			System.out.println("BoardCommand_search 호출");
@@ -72,15 +72,21 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardCommand_read 호출");
 			com = new BoardCommand_read();
 			com.execute(request, response);
-			String artiNum = (String) request.getAttribute("artiNum");
-//			viewPage = "./boardRead.jsp?artiNum="+ artiNum;
-			viewPage = "./read.co?&artiNum="+ artiNum;
+			int artiNum = (int) request.getAttribute("artiNum");
+			viewPage = "./boardRead.jsp?artiNum="+ artiNum;
+		}
+		else if(command.equals("edit")) {
+			System.out.println("BoardCommand_read 호출");
+			com = new BoardCommand_read();
+			com.execute(request, response);
+			int artiNum = (int) request.getAttribute("artiNum");
+			viewPage = "./boardEditForm.jsp?artiNum="+ artiNum;
 		}
 		else if(command.equals("upload")) {
 			System.out.println("BoardCommand_read 호출");
 			com = new BoardCommand_upload();
 			com.execute(request, response);
-			viewPage = "./list.co";
+			viewPage = "./board_temp.jsp";
 		}
 		else if(command.equals("update")) {
 			System.out.println("BoardCommand_update 호출");

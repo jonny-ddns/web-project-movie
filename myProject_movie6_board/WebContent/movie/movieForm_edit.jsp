@@ -85,7 +85,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp"></jsp:include>
+	<jsp:include page="/menu.jsp"></jsp:include>
 	<h2>movieForm edit</h2>
 	<form action="./update.do?movieCodeBefore=<%= movieCodeBefore %>&moviePosterBefore=<%= moviePosterBefore %>" method="post" enctype="multipart/form-data">
 		<table>			

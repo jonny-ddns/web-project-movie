@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-	System.out.println(">>boardWrite.jsp");
+	System.out.println(">>boardForm_edit.jsp");
+	String artiNum = request.getParameter("artiNum");
 %>
 <!DOCTYPE html>
 <html>
@@ -47,9 +48,9 @@
 <body>
 	<h1>board write</h1>	
 	<div class="writeCancel">
-		<h4><a href="./list.co">글쓰기 취소</a></h4>
+		<h4><a href="./read.co?artiNum=<%= artiNum %>">수정취소 -> 다시 해당글로 넘어가기</a></h4>
 	</div>
-	<form action="./upload.co">
+	<form action="./update.co" method="post">
 		<input type="hidden" name="memberId" value="">
 		<table class="tblWrite">
 			<tr class="trTitle">

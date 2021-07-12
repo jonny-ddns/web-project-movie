@@ -92,7 +92,7 @@
 	<h1>board list</h1>
 	<div class="div_writeArticle">
 		<label class="label_writeArticle">
-			<a href="<%= contextPath %>/board/boardWrite.jsp">글쓰기</a>
+			<a href="<%= contextPath %>/board/boardForm_write.jsp">글쓰기</a>
 		</label>
 	</div>
 	<div class="div_boardTable">
@@ -112,7 +112,7 @@
 			%>		
 				<tr>
 					<td class="tdClass" id="tdArtiNum"><%= artiNum %></td>
-					<td class="tdClass" id="tdArtiTitle"><a href=./read.co&artiNum=<%= artiNum %>><%= artiTitle %></a></td>
+					<td class="tdClass" id="tdArtiTitle"><a href=./read.co?artiNum=<%= artiNum %>><%= artiTitle %></a></td>
 					<td class="tdClass" id="tdWriter"><%= writer %></td>
 					<td class="tdClass" id="tdArtiDate"><%= artiDate %></td>				
 				</tr>					

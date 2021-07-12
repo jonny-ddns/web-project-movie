@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieSpec.jsp");
-	MovieVO movie = (MovieVO) request.getAttribute("movie");	
+	MovieVO movie = (MovieVO) request.getAttribute("movie");
+	String contextPath = request.getContextPath();
 
 	int movieCode	= movie.getMovieCode();
  	String title 	= movie.getTitle();
@@ -63,7 +64,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="menu.jsp"></jsp:include>
+	<jsp:include page="../menu.jsp"></jsp:include>
 	<h2>movie spec</h2>	
 	<table>	
 	<tr>
@@ -72,7 +73,7 @@
 	</tr>
 	<tr>
 		<td class="td1">CONTENT</td>
-		<td class="td2"><img class="img1" src="./movieThumbImage/<%= moviePoster %>" alt="[]"><%= content %></td>
+		<td class="td2"><img class="img1" src="<%= contextPath %>/movieThumbImage/<%= moviePoster %>" alt="	"><%= content %></td>
 	</tr>
 	<tr>
 		<td class="td1">DIRECTOR</td>
