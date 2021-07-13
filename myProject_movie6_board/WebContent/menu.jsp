@@ -2,15 +2,16 @@
 <% 
 	String contextPath = request.getContextPath();
 %>
-
-	<a href="<%= contextPath %>/board/list.co">게시판으로 이동</a>
+	&emsp;
+	<a href="<%= contextPath %>/board/list.co">게시판</a>&emsp;
+	<a href="<%= contextPath %>/movie/list.do">영화리스트</a>
 <% 
 	//로그인 했다면
 	if(session.getAttribute("memberLogin") != null){
 %>
-		<div>
+<%-- 		<div>
 			<span style="margin-right: 20px;"><a href="<%= contextPath %>/member/memberView.bo">전체회원현황</a></span>
-		</div>	
+		</div>	 --%>
 		<div style="text-align: right;">
 			<span style="margin-right: 20px;"><a href="<%= contextPath %>/member/signout.jsp">로그아웃</a></span>
 			<span style="margin-right: 20px;"><a href="<%= contextPath %>/member/memberVerify.jsp">회원정보 수정</a></span>

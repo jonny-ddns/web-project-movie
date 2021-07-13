@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	System.out.println(">>boardForm_write.jsp");
+	if(session.getAttribute("memberLogin") == null){
+		response.sendRedirect(request.getContextPath()+"/member/signin.jsp");
+	}
 %>
 <!DOCTYPE html>
 <html>

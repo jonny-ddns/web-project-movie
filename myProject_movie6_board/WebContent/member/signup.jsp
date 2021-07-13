@@ -184,8 +184,9 @@
 				</td>
 			</tr>			
 			<tr>
-				<td colspan="2"><input type="submit" value="Submit"></td>
-			</tr>			
+				<td><input type="submit" value="Submit"></td>
+				<td><input type="button" value="가입취소" onClick="history.go(-1)"></td>
+			</tr>
 		</table>
 	</form>
 </body>

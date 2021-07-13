@@ -89,12 +89,13 @@
 </style>
 </head>
 <body>
+	<jsp:include page="../menu.jsp" />
 	<h1>board list</h1>
 	<div class="div_writeArticle">
 		<label class="label_writeArticle">
 			<a href="<%= contextPath %>/board/boardForm_write.jsp">글쓰기</a>
 		</label>
-	</div>
+	</div>	
 	<div class="div_boardTable">
 		<table id="tblBoard">
 			<tr>
