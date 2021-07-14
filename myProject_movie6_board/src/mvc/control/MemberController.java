@@ -25,41 +25,29 @@ public class MemberController extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\ndoGet()");
 		actionBo(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\ndoPost()");
 		actionBo(request, response);
 	}
 	
 	private void actionBo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("\nMemberController - actionBo()");
 		request.setCharacterEncoding("UTF-8");
 		MemberCommand com = null;
 		String command = "";
 		String viewPage = "";
 		
-		String contextPath = request.getContextPath();
-		
-		
+		//연결할 단어를 url에서 추출하는 절차		
 		String uri = request.getRequestURI();
 		System.out.println("getRequestURI : "+ uri);
 		command = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));		
-		System.out.println("command : "+ command);	
-				
-		//연결할 단어를 url에서 추출하는 절차 
-//		String servletPath = request.getServletPath();
-//		String folderName = "member";
-//		
-//		command = servletPath.substring(folderName.length()+2, servletPath.length()-3);
+		System.out.println("command : "+ command); 
 
 		if(command.equals("signup")) {
 			System.out.println("MemberCommand_signup 호출");
 			com = new MemberCommand_signup();
 			com.execute(request, response);
-//			viewPage = contextPath+"menu.jsp";
 			viewPage = "../index.jsp";
 		}
 		else if(command.equals("signin")) {
@@ -71,8 +59,7 @@ public class MemberController extends HttpServlet {
 		else if(command.equals("compare")) {
 			System.out.println("MemberCommand_pwCompare 호출");
 			com = new MemberCommand_pwCompare();
-			com.execute(request, response);
-			
+			com.execute(request, response);			
 			viewPage = "./memberVerify.jsp";
 			if((boolean) request.getAttribute("compareResult")) {
 				viewPage = "./memberEdit_form.jsp";
@@ -99,8 +86,7 @@ public class MemberController extends HttpServlet {
 		else {
 			System.out.println("--페이지를 찾지 못함");
 			viewPage = "../index.jsp";
-		}
-		
+		}		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

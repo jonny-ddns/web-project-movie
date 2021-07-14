@@ -39,12 +39,6 @@ public class BoardController extends HttpServlet {
 		String command		= "";
 		String viewPage		= "";
 		
-//		String contextPath = request.getContextPath();	
-		
-		/*
-		 * 이동할 path 생성하기
-		 * getRequestURI 로 가져온 값에서 '/'과 '.' 사이의 단어 추출하기
-		 */
 		String uri = request.getRequestURI();
 		System.out.println("getRequestURI : "+ uri);
 		command = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));		
@@ -60,7 +54,6 @@ public class BoardController extends HttpServlet {
 				System.out.println("[error] parameter boardList is null");
 			}
 			viewPage = "./boardList.jsp";
-//			viewPage = "./board_temp.jsp";
 		}
 		else if(command.equals("search")) {
 			System.out.println("BoardCommand_search 호출");
@@ -107,5 +100,4 @@ public class BoardController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
 	}
-
 }

@@ -3,6 +3,10 @@
 <%
 	System.out.println(">>movieForm_edit.jsp");
 	
+	if(session.getAttribute("memberLogin") == null){
+		response.sendRedirect(request.getContextPath()+ "/member/signin.jsp");
+	}
+	
 	int edit			= 0;
 	int movieCodeBefore	= 0;
 	int movieCode		= 0;

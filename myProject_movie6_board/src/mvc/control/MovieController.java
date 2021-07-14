@@ -19,47 +19,24 @@ import mvc.command.movie.MovieCommand_upload;
 @WebServlet("*.do")
 public class MovieController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public MovieController() {
-        super();
-//        System.out.println(">>MovieController.servlet");
-    }
-
+     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.println("\n>>doGet()");
 		actionDo(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.println("\n>>doPost()");
 		actionDo(request, response);
 	}
 		
 	private void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.println("actionDo()");
 		MovieCommand com	= null;
 		String command		= "";
 		String viewPage		= "";	
 		
-		
-		
-		
+		//연결할 단어를 url에서 추출하는 절차 
 		String uri = request.getRequestURI();
 		System.out.println("getRequestURI : "+ uri);
 		command = uri.substring(uri.lastIndexOf("/")+1, uri.lastIndexOf("."));		
 		System.out.println("command : "+ command);	
-		
-		//연결할 단어를 url에서 추출하는 절차 
-//		String uri = null;
-//		String contextPath;
-		
-//		uri = request.getRequestURI();
-//		System.out.println("getRequestURI : "+ uri);		
-		
-//		contextPath = request.getContextPath();
-//		System.out.println("getContextPath : "+ contextPath);
-		
-//		command = uri.substring(contextPath.length()+1, uri.length()-3);
-//		System.out.println("command : "+ command);		
 		
 		//MovieCommand 구현체 호출해서 연결하기
 		//영화 리스트 페이지 요청
@@ -68,7 +45,6 @@ public class MovieController extends HttpServlet {
 			com = new MovieCommand_list();
 			com.execute(request, response);
 			viewPage = "./movieList.jsp";
-			//viewPage = "movie/movieList.jsp";
 		}
 		//영화 상세 정보 페이지 요청
 		else if(command.equals("spec")) {
@@ -100,10 +76,8 @@ public class MovieController extends HttpServlet {
 			com = new MovieCommand_update();
 			com.execute(request, response);
 			int movieCode = (int) request.getAttribute("movieCode");
-//			viewPage = "spec.do?movieCode="+ movieCode;
+
 			viewPage = "./movieForm_result.jsp?movieCode="+ movieCode;
-			
-//			response.sendRedirect("movieSpec?movieCode="+ movieCode);
 			System.out.println("--실행완료");
 		}
 		//영화 내용 삭제후 영화리스트 페이지 요청
@@ -111,12 +85,13 @@ public class MovieController extends HttpServlet {
 			System.out.println("MovieCommand_delete 호출");
 			com = new MovieCommand_delete();
 			com.execute(request, response);
-			viewPage = "./index.jsp";
+			//viewPage = request.getContextPath()+ "/movie/temp.jsp";
+			viewPage = "../index.jsp";
 		}
 		//페이지를 찾지 못함
 		else {
 			System.out.println("[error] 요청정보를 찾지못함");
-			viewPage = "./index.jsp";
+			viewPage = request.getContextPath()+ "/index.jsp";
 		}				
 		RequestDispatcher rd = request.getRequestDispatcher(viewPage);
 		rd.forward(request, response);
