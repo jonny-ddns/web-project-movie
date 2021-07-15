@@ -1,51 +1,47 @@
 package mvc.db.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import mvc.db.DBconnection;
-import mvc.db.vo.MovieVO;
 
-public class MovieDao {
-	private Connection conn					= null;
-	private PreparedStatement pstmt 		= null;
-	private ResultSet rs					= null;
-	private static MovieDao movieDao		= null;
-	private static List<MovieVO> movieList	= null;
+import mvc.db.DBConnectionPool;
+import mvc.db.dto.DtoMovie;
+
+public class DaoMovie extends DAO {
+	private static DaoMovie movieDao		= null;
+	private static List<DtoMovie> movieList	= null;
 	
-	private MovieDao() {
+	private DaoMovie() {
 	}
 	
-	public static MovieDao getInstance() {
+	public static DaoMovie getInstance() {
 		if(movieDao == null) {
-			movieDao = new MovieDao();
+			movieDao = new DaoMovie();
 		}
-		movieList = new ArrayList<MovieVO>();
+		movieList = new ArrayList<DtoMovie>();
 		return movieDao;
 	}
 	
-	public List<MovieVO> getMovieList(){
+	public List<DtoMovie> getMovieList(){
 		return movieList;
 	}
 	
 	/*--------------------------------------------------*/
 	
 	//모든 영화 리스트 형태로 가져오기
-	public List<MovieVO> movieList() throws SQLException {
+	public List<DtoMovie> movieList() throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieList()");
 		String sql = "SELECT * FROM movies WHERE isActive = 'y' ORDER BY registerDate DESC, title ASC;";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
 		movieList = getMovieList();
 
 		while(rs.next()){
-			MovieVO movie = new MovieVO();
+			DtoMovie movie = new DtoMovie();
 			movie.setMovieCode(rs.getInt("movieCode"))
 				 .setTitle(rs.getString("title"))
 				 .setDirector(rs.getString("director"))
@@ -67,12 +63,13 @@ public class MovieDao {
 	}
 	
 	//DB에 영화 삽입하기
-	public void movieUpload(MovieVO movie) throws SQLException {
+	public void movieUpload(DtoMovie movie) throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieInsert()");
 		String sql = "INSERT INTO movies(movieCode, title, director, actors, genre, content, runningTime, rating, score, moviePoster, registerDate, isActive) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?);";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setInt(1, movie.getMovieCode());
@@ -95,17 +92,18 @@ public class MovieDao {
 	}
 	
 	//movieCode 값으로 컬럼값을 조회하는 메소드
-	public MovieVO movieSearchByCode(int movieCode) throws SQLException {
-		MovieVO movie = null;
+	public DtoMovie movieSearchByCode(int movieCode) throws SQLException, ClassNotFoundException {
+		DtoMovie movie = null;
 		System.out.println("MovieDao - movieSearchByCode()");
 		String sql = "SELECT * FROM movies WHERE movieCode = "+ movieCode+";";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 
 		if(rs.next()){
-			movie = new MovieVO();
+			movie = new DtoMovie();
 			movie.setMovieCode(rs.getInt("movieCode"))
 				 .setTitle(rs.getString("title"))
 				 .setDirector(rs.getString("director"))
@@ -125,13 +123,14 @@ public class MovieDao {
 	}
 	
 	//movie 내용 수정하는 메소드
-	public void movieUpdate(MovieVO movie, int movieCode) throws SQLException {
+	public void movieUpdate(DtoMovie movie, int movieCode) throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieEdit()");
 		String sql = "UPDATE movies SET movieCode = ?, title = ?, director = ?, actors = ?, genre = ?, "
 				+ "content = ?, runningTime = ?, rating = ?, score = ?, moviePoster = ?, registerDate=now() "
 				+ "WHERE movieCode = ?;";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setInt(1, movie.getMovieCode());
@@ -153,10 +152,12 @@ public class MovieDao {
 	}
 	
 	//movie 내용 삭제하는 메소드
-	public void movieDelete(int movieCode) throws SQLException {
+	public void movieDelete(int movieCode) throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieDelete()");
 		String sql = "UPDATE movies SET registerDate = now(), isActive = 'n' WHERE movieCode = "+ movieCode;
-		conn = DBconnection.getConnection();
+		
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.executeUpdate();
 		

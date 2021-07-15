@@ -1,4 +1,4 @@
-<%@page import="mvc.db.vo.MovieVO"%>
+<%@page import="mvc.db.dto.DtoMovie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieForm_edit.jsp");
@@ -20,10 +20,10 @@
 	int score			= 0;
 	String moviePosterBefore = "";
 	
-	MovieVO movie = null;
+	DtoMovie movie = null;
 	
 	if(request.getAttribute("movie") != null){
-		movie = (MovieVO) request.getAttribute("movie");	
+		movie = (DtoMovie) request.getAttribute("movie");	
 	}
 	if(request.getParameter("movieCode") != null){
 		movieCodeBefore = Integer.parseInt(request.getParameter("movieCode"));
@@ -42,8 +42,6 @@
 	rating 			= movie.getRating();
 	score 			= movie.getScore();
 	moviePosterBefore = movie.getMoviePoster();
-	
-	
 %>
 <!DOCTYPE html>
 <html>

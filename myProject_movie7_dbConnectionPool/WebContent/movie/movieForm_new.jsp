@@ -1,4 +1,4 @@
-<%@page import="mvc.db.vo.MovieVO"%>
+<%@page import="mvc.db.dto.DtoMovie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieForm_new.jsp");

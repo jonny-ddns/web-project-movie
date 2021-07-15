@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import mvc.db.dao.MovieDao;
-import mvc.db.vo.MovieVO;
+import mvc.db.dao.DaoMovie;
+import mvc.db.dto.DtoMovie;
 
 public class MovieCommand_upload implements MovieCommand{
 	@Override
@@ -25,7 +25,7 @@ public class MovieCommand_upload implements MovieCommand{
 			Enumeration<?> files	= multi.getFileNames();
 			String fName			= (String) files.nextElement();
 			String moviePoster		= multi.getFilesystemName(fName);
-			MovieVO movie			= new MovieVO();
+			DtoMovie movie			= new DtoMovie();
 			
 			int movieCode = Integer.parseInt(multi.getParameter("movieCode"));
 				
@@ -42,7 +42,7 @@ public class MovieCommand_upload implements MovieCommand{
 				 .setIsActive("y");
 			request.setAttribute("movie", movie);
 
-			MovieDao mdao = MovieDao.getInstance();
+			DaoMovie mdao = DaoMovie.getInstance();
 			mdao.movieUpload(movie);
 			
 			request.setAttribute("movieCode", movieCode);
@@ -51,6 +51,8 @@ public class MovieCommand_upload implements MovieCommand{
 			npe.getMessage();
 		} catch (IOException ioe) {
 			ioe.getMessage();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.getMessage();
 		} catch (SQLException sqle) {
 			sqle.getMessage();
 		} catch (Exception e) {

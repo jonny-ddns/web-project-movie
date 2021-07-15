@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import mvc.command.movie.MovieCommand;
 import mvc.command.movie.MovieCommand_delete;
 import mvc.command.movie.MovieCommand_edit;

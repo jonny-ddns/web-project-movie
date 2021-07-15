@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import mvc.db.dao.BoardDao;
-import mvc.db.vo.BoardVO;
+import mvc.db.dao.DaoBoard;
+import mvc.db.dto.DtoBoard;
 
 public class BoardCommand_write implements BoardCommand{
 	@Override
@@ -27,7 +27,7 @@ public class BoardCommand_write implements BoardCommand{
 			Enumeration<?> files	= multi.getFileNames();
 			String fName			= (String) files.nextElement();
 			String boardImage		= multi.getFilesystemName(fName);
-			BoardVO board 			= new BoardVO();
+			DtoBoard board 			= new DtoBoard();
 						
 			board.setArtiTitle(multi.getParameter("title"))
 				 .setWriter(multi.getParameter("writer"))
@@ -35,14 +35,16 @@ public class BoardCommand_write implements BoardCommand{
 				 .setImage(boardImage)
 				 .setContent(multi.getParameter("content"))
 				 .setIsActive("y");
-			BoardDao dao = BoardDao.getInstance();
+			DaoBoard dao = DaoBoard.getInstance();
 			dao.boardWrite(board);
 			
 			System.out.println("BoardCommand_write() end");
 		} catch (NullPointerException npe) {
 			npe.getMessage();
-		} catch(IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.getMessage();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.getMessage();
 		} catch (SQLException sqle) {
 			sqle.getMessage();
 		} catch (Exception e) {

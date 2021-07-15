@@ -1,21 +1,21 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="mvc.db.vo.BoardVO"%>
+<%@page import="mvc.db.dto.DtoBoard"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
+<%
 	System.out.println(">>boardList.jsp");
 	String contextPath = request.getContextPath();	
 	
 	//날짜 표시하기
-	List<BoardVO> boardList = null;
+	List<DtoBoard> boardList = null;
 	if(request.getAttribute("boardList") != null){
-		boardList = (List<BoardVO>) request.getAttribute("boardList");
+		boardList = (List<DtoBoard>) request.getAttribute("boardList");
 	}
 	int artiNum = 0;
 	String artiDate = "";
 	String artiTitle = "";
-	String writer = "";	
+	String writer = "";
 %>
 <!DOCTYPE html>
 <html>
@@ -93,7 +93,7 @@
 	<h1>board list</h1>
 	<div class="div_writeArticle">
 		<label class="label_writeArticle">
-			<a href="<%= contextPath %>/board/boardForm_write.jsp">글쓰기</a>
+			<a href="<%=contextPath%>/board/boardForm_write.jsp">글쓰기</a>
 		</label>
 	</div>	
 	<div class="div_boardTable">
@@ -104,12 +104,12 @@
 				<th class="thClass" id="thWriter">작성자</th>
 				<th class="thClass" id="thArtiDate">작성날짜</th>
 			</tr>
-			<% 
-				for(BoardVO board : boardList){
-					artiNum = board.getArtiNum();
-					artiTitle = board.getArtiTitle();
-					writer = board.getWriter();
-					artiDate = board.getArtiDate();				
+			<%
+				for(DtoBoard board : boardList){
+						artiNum = board.getArtiNum();
+						artiTitle = board.getArtiTitle();
+						writer = board.getWriter();
+						artiDate = board.getArtiDate();
 			%>		
 				<tr>
 					<td class="tdClass" id="tdArtiNum"><%= artiNum %></td>

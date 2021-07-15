@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import mvc.db.dao.MemberDao;
-import mvc.db.vo.MemberVO;
+import mvc.db.dao.DaoMember;
+import mvc.db.dto.DtoMember;
 
 public class MemberCommand_signin implements MemberCommand{
 	@Override
@@ -16,11 +16,11 @@ public class MemberCommand_signin implements MemberCommand{
 			System.out.println(">>MemberCommand_signin()");
 			String id = request.getParameter("id");
 			String pw = request.getParameter("pw");
-			MemberDao mdao = MemberDao.getInstance();
+			DaoMember mdao = DaoMember.getInstance();
 			boolean isVerified = mdao.memberVerify(id, pw);
 			
 			HttpSession session	= null;
-			MemberVO member		= null;
+			DtoMember member = null;
 			if(isVerified) {
 				member = mdao.memberSearchByID(id);
 				session = request.getSession();
@@ -30,6 +30,8 @@ public class MemberCommand_signin implements MemberCommand{
 			System.out.println(">>MemberCommand_signin() end");
 		} catch (NullPointerException npe) {
 			npe.getMessage();
+		} catch (ClassNotFoundException cnfe) {
+			cnfe.getMessage();
 		} catch (SQLException sqle) {
 			sqle.getMessage();
 		} catch (Exception e) {

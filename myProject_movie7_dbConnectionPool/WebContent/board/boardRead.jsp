@@ -1,8 +1,8 @@
-<%@page import="mvc.db.vo.BoardVO"%>
+<%@page import="mvc.db.dto.DtoBoard"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
+<%
 	System.out.println(">>boardRead.jsp");
-	BoardVO board = (BoardVO) request.getAttribute("board");
+	DtoBoard board = (DtoBoard) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
 	String artiDate = board.getArtiDate();
 	String artiTitle = board.getArtiTitle();

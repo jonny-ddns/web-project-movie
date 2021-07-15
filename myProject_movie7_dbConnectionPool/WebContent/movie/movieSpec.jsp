@@ -1,8 +1,8 @@
-<%@page import="mvc.db.vo.MovieVO"%>
+<%@page import="mvc.db.dto.DtoMovie"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieSpec.jsp");
-	MovieVO movie = (MovieVO) request.getAttribute("movie");
+	DtoMovie movie = (DtoMovie) request.getAttribute("movie");
 	String contextPath = request.getContextPath();
 
 	int movieCode	= movie.getMovieCode();
@@ -14,7 +14,7 @@
 	int runningTime	= movie.getRunningTime();
 	String rating	= movie.getRating();
 	int score		= movie.getScore();
-	String moviePoster	= movie.getMoviePoster();	
+	String moviePoster	= movie.getMoviePoster();
 %>
 <!DOCTYPE html>
 <html>

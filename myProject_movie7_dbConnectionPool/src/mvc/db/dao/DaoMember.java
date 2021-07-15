@@ -1,45 +1,39 @@
 package mvc.db.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import mvc.db.DBconnection;
-import mvc.db.vo.MemberVO;
+import mvc.db.DBConnectionPool;
+import mvc.db.dto.DtoMember;
 
-public class MemberDao {
-
-	private Connection conn					= null;
-	private PreparedStatement pstmt 		= null;
-	private ResultSet rs					= null;
-	private static MemberDao memberDao		= null;
-	private List<MemberVO> memberList 		= null;
+public class DaoMember extends DAO{
+	private static DaoMember memberDao		= null;
+	private List<DtoMember> memberList 		= null;
 	
-	private MemberDao() {
+	private DaoMember() {
 	}
 	
-	public static MemberDao getInstance() {
+	public static DaoMember getInstance() {
 		if(memberDao == null) {
-			memberDao = new MemberDao();
+			memberDao = new DaoMember();
 		}
 		return memberDao;
 	}
 	
-	public List<MemberVO> getMemberAll() throws SQLException {
+	public List<DtoMember> getMemberAll() throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - getMemberAll()");
 		String sql = "SELECT * FROM members ORDER BY joinDate DESC;";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
 		memberList = new ArrayList<>();
-		MemberVO member = null;
+		DtoMember member = null;
 		
 		while(rs.next()){
-			member = new MemberVO();
+			member = new DtoMember();
 			member.setId(rs.getString("id"))
 				  .setPassword(rs.getString("password"))
 				  .setName(rs.getString("name"))
@@ -60,11 +54,12 @@ public class MemberDao {
 		return memberList;
 	}
 	
-	public boolean memberVerify(String id, String pw) throws SQLException {
+	public boolean memberVerify(String id, String pw) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberVerify()");
 		String sql = "SELECT * FROM members WHERE id=? AND password=?;";		
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
@@ -82,12 +77,13 @@ public class MemberDao {
 		return isVefied;
 	}
 	
-	public void memberInsert(MemberVO member) throws SQLException {
+	public void memberInsert(DtoMember member) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberInsert()");
 		String sql = "INSERT INTO members(id, password, name, email, birthyear, gender, interest, joinDate, isActive) "
 					+ "VALUES(?, ?, ?, ?, ?, ?, ?, now(), ?);";
 			
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		
 		pstmt.setString(1, member.getId());
@@ -106,17 +102,18 @@ public class MemberDao {
 		System.out.println("memberInsert - end");
 	}
 
-	public MemberVO memberSearchByID(String id) throws SQLException {
+	public DtoMember memberSearchByID(String id) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberSearchByID()");
 		String sql = "SELECT * FROM members WHERE id='"+ id+ "';";
 
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
-		MemberVO member = null;
+		DtoMember member = null;
 		if(rs.next()) {
-			member = new MemberVO();
+			member = new DtoMember();
 			member.setId(rs.getString("id"))
 				  .setPassword(rs.getString("password"))
 				  .setName(rs.getString("name"))
@@ -135,11 +132,12 @@ public class MemberDao {
 		return member;
 	}
 	
-	public boolean memberPwCompare(MemberVO member, String inputPw) throws SQLException {
+	public boolean memberPwCompare(DtoMember member, String inputPw) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberPwCompare()");
 		String sql = "SELECT * FROM members WHERE id = ?;";
 		
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, member.getId());
 		rs = pstmt.executeQuery();
@@ -163,11 +161,12 @@ public class MemberDao {
 		return result;
 	}
 	
-	public void memberEdit(MemberVO member, String id) throws SQLException {
+	public void memberEdit(DtoMember member, String id) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberEdit()");			
 		String sql = "UPDATE members SET password=?, name=?, email=?, birthyear=?, gender=?, interest=?, updateDate=now() WHERE id = ?;";
 			
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 
 		pstmt.setString(1, member.getPassword());
@@ -185,11 +184,12 @@ public class MemberDao {
 		System.out.println("memberEdit - end");
 	}
 	
-	public void memberDelete(String id) throws SQLException {
+	public void memberDelete(String id) throws SQLException, ClassNotFoundException {
 		System.out.println("MemberDao - memberDelete()");
 		String sql = "UPDATE members SET isActive = 'n' WHERE id = ?;";
 			
-		conn = DBconnection.getConnection();
+		dbcp = DBConnectionPool.getInstance();
+		conn = dbcp.getConnection();
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.executeUpdate();

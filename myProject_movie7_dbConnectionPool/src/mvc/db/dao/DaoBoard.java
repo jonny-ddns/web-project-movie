@@ -1,53 +1,44 @@
 package mvc.db.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import mvc.db.DBconnection;
-import mvc.db.vo.BoardVO;
+import mvc.db.DBConnectionPool;
+import mvc.db.dto.DtoBoard;
 
-public class BoardDao {	
-	private Connection conn					= null;
-	private PreparedStatement pstmt 		= null;
-	private ResultSet rs					= null;
-	private static BoardDao boardDao		= null;
-	private static List<BoardVO> boardList	= null;
+public class DaoBoard extends DAO {
 	
-	private BoardDao(){
-	}	
+	private DaoBoard() { }
 	
-	public static BoardDao getInstance() {
-		if(boardDao == null) {
-			boardDao = new BoardDao();
-		}
-		boardList = new ArrayList<BoardVO>();
-		return boardDao;
+	private static class InnerClassBoardDao{
+		private static final DaoBoard boardDao = new DaoBoard();
+	}
+	public static DaoBoard getInstance() {
+		return InnerClassBoardDao.boardDao;
 	}
 	
-	public static List<BoardVO> getBoardList() {
-		if(boardList == null) {
-			boardList = new ArrayList<BoardVO>();
-		}
-		return boardList;
+	private static class InnerClassBoardList{
+		private static final List<DtoBoard> boardList = new ArrayList<DtoBoard>();
+	}	
+	public List<DtoBoard> getBoardList() {
+		return InnerClassBoardList.boardList;
 	}
 	
 	/*----------------------------------*/
-	public List<BoardVO> getBoardAll() throws SQLException {
+	public List<DtoBoard> getBoardAll() throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - getBoardAll()");
 		String sql = "SELECT * FROM board WHERE isActive='y' ORDER BY artiNum DESC;";
+	
+		dbcp 	= DBConnectionPool.getInstance();
+		conn 	= dbcp.getConnection();
+		pstmt 	= conn.prepareStatement(sql);
+		rs 		= pstmt.executeQuery();
 		
-		conn = DBconnection.getConnection();
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		
-		boardList = getBoardList();
-		BoardVO board;
+		List<DtoBoard> boardList = getBoardList();
+		DtoBoard board;
 		
 		while(rs.next()){
-			board = new BoardVO();
+			board = new DtoBoard();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -72,13 +63,14 @@ public class BoardDao {
 		return isVefied;
 	}
 
-	public void boardWrite(BoardVO board) throws SQLException {
+	public void boardWrite(DtoBoard board) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardWrite()");
 		String sql = "INSERT INTO board(artiTitle, writer, artiDate, openPublic, image, content, isActive) "
 				+ "VALUES(?, ?, now(), ?, ?, ?, 'y');";
 		
-		conn = DBconnection.getConnection();
-		pstmt = conn.prepareStatement(sql);
+		dbcp	= DBConnectionPool.getInstance();
+		conn 	= dbcp.getConnection();
+		pstmt 	= conn.prepareStatement(sql);
 		
 		pstmt.setString(1, board.getArtiTitle());
 		pstmt.setString(2, board.getWriter());
@@ -93,17 +85,18 @@ public class BoardDao {
 		System.out.println("boardWrite - end");
 	}
 	
-	public BoardVO boardSearchByArtiNum(int artiNum) throws SQLException {
+	public DtoBoard boardSearchByArtiNum(int artiNum) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardSearchByArtiNum()");
 		String sql = "SELECT * FROM board WHERE artiNum='"+ artiNum+ "';";
 		
-		conn = DBconnection.getConnection();
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
+		dbcp 	= DBConnectionPool.getInstance();
+		conn 	= dbcp.getConnection();
+		pstmt	= conn.prepareStatement(sql);
+		rs 		= pstmt.executeQuery();
 		
-		BoardVO board = null;
+		DtoBoard board = null;
 		if(rs.next()) {
-			board = new BoardVO();
+			board = new DtoBoard();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -120,17 +113,18 @@ public class BoardDao {
 		return board;
 	}
 
-	public BoardVO boardSearchByID(String id) throws SQLException {
+	public DtoBoard boardSearchByID(String id) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardSearchByID()");
 		String sql = "SELECT * FROM board WHERE id='"+ id+ "';";
 		
-		conn = DBconnection.getConnection();
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
+		dbcp 	= DBConnectionPool.getInstance();
+		conn	= dbcp.getConnection();
+		pstmt	= conn.prepareStatement(sql);
+		rs		= pstmt.executeQuery();
 		
-		BoardVO board = null;
+		DtoBoard board = null;
 		if(rs.next()) {
-			board = new BoardVO();
+			board = new DtoBoard();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -147,7 +141,7 @@ public class BoardDao {
 		return board;
 	}
 
-	public void boardEdit(BoardVO board, String id) {
+	public void boardEdit(DtoBoard board, String id) {
 	}
 
 	public void boardDelete(String id) {
