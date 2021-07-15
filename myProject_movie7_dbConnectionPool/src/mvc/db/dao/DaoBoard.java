@@ -7,21 +7,21 @@ import mvc.db.DBConnectionPool;
 import mvc.db.dto.DtoBoard;
 
 public class DaoBoard extends DAO {
+	private static DaoBoard boardDao	= null;
+	private static List<DtoBoard> boardList = null;
 	
-	private DaoBoard() { }
+	private DaoBoard(){ }
 	
-	private static class InnerClassBoardDao{
-		private static final DaoBoard boardDao = new DaoBoard();
-	}
 	public static DaoBoard getInstance() {
-		return InnerClassBoardDao.boardDao;
+		if(boardDao == null) {
+			boardDao = new DaoBoard();
+		}
+		boardList = new ArrayList<DtoBoard>();
+		return boardDao;
 	}
 	
-	private static class InnerClassBoardList{
-		private static final List<DtoBoard> boardList = new ArrayList<DtoBoard>();
-	}	
-	public List<DtoBoard> getBoardList() {
-		return InnerClassBoardList.boardList;
+	public List<DtoBoard> getBoardList(){
+		return boardList;
 	}
 	
 	/*----------------------------------*/

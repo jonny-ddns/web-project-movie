@@ -30,7 +30,7 @@
 	
 	.div_writeArticle{
 		text-align: center;
-		margin-left: 700px;
+		margin-left: 550px;
 		margin-bottom: 20px;
 	}
 	.label_writeArticle{

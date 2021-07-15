@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td class="td1">CONTENT</td>
-		<td class="td2"><img class="img1" src="<%= contextPath %>/movieThumbImage/<%= moviePoster %>" alt="	"><%= content %></td>
+		<td class="td2"><img class="img1" src="<%= contextPath %>/resources/images/movie/<%= moviePoster %>" alt="	"><%= content %></td>
 	</tr>
 	<tr>
 		<td class="td1">DIRECTOR</td>

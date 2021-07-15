@@ -3,7 +3,6 @@ package mvc.db.dao;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import mvc.db.DBConnectionPool;
 import mvc.db.dto.DtoMovie;
 
@@ -11,8 +10,7 @@ public class DaoMovie extends DAO {
 	private static DaoMovie movieDao		= null;
 	private static List<DtoMovie> movieList	= null;
 	
-	private DaoMovie() {
-	}
+	private DaoMovie(){ }
 	
 	public static DaoMovie getInstance() {
 		if(movieDao == null) {
@@ -39,7 +37,7 @@ public class DaoMovie extends DAO {
 		rs = pstmt.executeQuery();
 		
 		movieList = getMovieList();
-
+		
 		while(rs.next()){
 			DtoMovie movie = new DtoMovie();
 			movie.setMovieCode(rs.getInt("movieCode"))
@@ -52,7 +50,7 @@ public class DaoMovie extends DAO {
 				 .setRating(rs.getString("rating"))
 				 .setScore(rs.getInt("score"))
 				 .setMoviePoster(rs.getString("moviePoster"));
-			movieList.add(movie);
+			movieList.add(movie);					
 		}
 		if(rs != null) { rs.close(); }
 		if(pstmt != null) { pstmt.close(); }
