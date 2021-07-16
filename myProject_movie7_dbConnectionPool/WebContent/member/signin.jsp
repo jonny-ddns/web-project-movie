@@ -14,7 +14,6 @@
 		text-align: center;
 	}
 	#signinCancel{
-		/* text-align: center; */	
 	}
 </style>
 </head>
@@ -27,7 +26,7 @@
 			<input type="submit" value="sign in">&emsp;
 		</p>
 		<p>
-			<a id="signinCancel" href="../index.jsp">아이디 및 비밀번호 찾기</a>
+			<a id="signinCancel" href="./memberSearch.jsp">아이디 및 비밀번호 찾기</a>
 			<a id="signinCancel" href="../index.jsp">로그인 취소</a>
 		</p>
 	</form>
