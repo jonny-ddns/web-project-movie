@@ -15,11 +15,11 @@ public class MemberCommand_memberDelete implements MemberCommand{
 			mdao.memberDelete(id);
 			System.out.println("MemberCommand_memberDelete() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
-			sqle.getMessage();
+			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

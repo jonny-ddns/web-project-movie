@@ -18,9 +18,9 @@ public class BoardCommand_list implements BoardCommand{
 			request.setAttribute("boardList", boardList);
 			System.out.println("BoardCommand_list() end");			
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

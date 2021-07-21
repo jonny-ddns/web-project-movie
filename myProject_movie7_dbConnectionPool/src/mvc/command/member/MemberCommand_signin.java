@@ -29,9 +29,9 @@ public class MemberCommand_signin implements MemberCommand{
 			request.setAttribute("isVerified", isVerified);
 			System.out.println(">>MemberCommand_signin() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
 			sqle.getMessage();
 		} catch (Exception e) {

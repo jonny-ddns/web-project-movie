@@ -15,12 +15,15 @@ public class MovieCommand_list implements MovieCommand{
 			DaoMovie mdao = DaoMovie.getInstance();
 			List<DtoMovie> movieList = mdao.movieList();
 			request.setAttribute("movieList", movieList);
-			System.out.println("MovieCommand_list() - end");
+			System.out.println("MovieCommand_list() end");
 		} catch (NullPointerException npe) {
+			System.out.println("NullPointerException");
 			npe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException");
 			cnfe.getMessage();
 		} catch (SQLException sqle) {
+			System.out.println("SQLException");
 			sqle.getMessage();
 		} catch (Exception e) {
 			e.printStackTrace();

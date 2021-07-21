@@ -27,10 +27,13 @@ public class MovieCommand_edit implements MovieCommand{
 			
 			System.out.println("MovieCommand_edit() end");
 		} catch (NullPointerException npe) {
+			System.out.println("NullPointerException");
 			npe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException");
 			cnfe.getMessage();
 		} catch(SQLException sqle) {
+			System.out.println("SQLException");
 			sqle.getMessage();
 		} catch (Exception e) {
 			e.printStackTrace();

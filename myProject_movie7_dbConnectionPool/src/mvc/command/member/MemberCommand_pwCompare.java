@@ -22,11 +22,11 @@ public class MemberCommand_pwCompare implements MemberCommand{
 			
 			System.out.println("MemberCommand_pwCompare() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
-			sqle.getMessage();
+			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -36,7 +36,7 @@ public class MovieCommand_update implements MovieCommand{
 			/*-----------------------------------------------------------------
 				upload image file from <form> by using "MultipartRequest"
 			-----------------------------------------------------------------*/
-			String savePath = "D:/Programming/workspace/dynamicWebProject/myProject_movie6_board/WebContent/resources/images/movie";
+			String savePath = "D:/Programming/workspace/dynamicWebProject/myProject_movie7_dbConnectionPool/WebContent/resources/images/movie";
 			int fileLimit = 1000*1024*1024;
 			MultipartRequest multi = new MultipartRequest( request, savePath, fileLimit, "UTF-8", new DefaultFileRenamePolicy() );
 			
@@ -69,14 +69,18 @@ public class MovieCommand_update implements MovieCommand{
 			mdao.movieUpdate(movie, movieCodeBefore);
 			
 			request.setAttribute("movieCode", movieCode);
-			System.out.println(">>MovieCommand_update() - end");
+			System.out.println(">>MovieCommand_update() end");
 		} catch (NullPointerException npe) {
+			System.out.println("NullPointerException");
 			npe.getMessage();
 		} catch (IOException ioe) {
+			System.out.println("IOException");
 			ioe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException");
 			cnfe.getMessage();
 		} catch (SQLException sqle) {
+			System.out.println("SQLException");
 			sqle.getMessage();
 		} catch (Exception e) {
 			e.printStackTrace();
