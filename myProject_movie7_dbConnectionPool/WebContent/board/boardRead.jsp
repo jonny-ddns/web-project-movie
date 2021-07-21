@@ -1,8 +1,8 @@
-<%@page import="mvc.db.dto.DtoBoard"%>
+<%@page import="mvc.db.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>boardRead.jsp");
-	DtoBoard board = (DtoBoard) request.getAttribute("board");
+	BoardDto board = (BoardDto) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
 	String artiDate = board.getArtiDate();
 	String artiTitle = board.getArtiTitle();
@@ -82,7 +82,7 @@
 			<td class="tr_body" id="th_artiDate"><%= artiDate %></td>
 		</tr>
 		<tr>
-			<td class="tr_content" colspan="3 "><%= content %></td>
+			<td class="tr_content" colspan="3"><%= content %></td>
 		</tr>
 	</table>	
 </body>

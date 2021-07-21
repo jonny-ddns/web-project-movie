@@ -3,15 +3,15 @@ package mvc.command.movie;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mvc.db.dao.DaoMovie;
-import mvc.db.dto.DtoMovie;
+import mvc.db.dao.MovieDao;
+import mvc.db.dto.MovieDto;
 
 public class MovieCommand_edit implements MovieCommand{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			System.out.println(">>MovieCommand_edit()");
-			DaoMovie mdao = DaoMovie.getInstance();
+			MovieDao mdao = MovieDao.getInstance();
 			int movieCode = 0;
 			
 			//parameter "movieCode" check
@@ -20,7 +20,7 @@ public class MovieCommand_edit implements MovieCommand{
 			} else {
 				System.out.println("[error] movieCode is null");
 			}
-			DtoMovie movie = mdao.movieSearchByCode(movieCode);
+			MovieDto movie = mdao.movieSearchByCode(movieCode);
 			
 			request.setAttribute("movie", movie);
 			request.setAttribute("movieCode", movieCode);

@@ -4,30 +4,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import mvc.db.DBConnectionPool;
-import mvc.db.dto.DtoMovie;
+import mvc.db.dto.MovieDto;
 
-public class DaoMovie extends DAO {
-	private static DaoMovie movieDao		= null;
-	private static List<DtoMovie> movieList	= null;
+public class MovieDao extends DAO {
+	private static MovieDao movieDao		= null;
+	private static List<MovieDto> movieList	= null;
 	
-	private DaoMovie(){ }
+	private MovieDao(){ }
 	
-	public static DaoMovie getInstance() {
+	public static MovieDao getInstance() {
 		if(movieDao == null) {
-			movieDao = new DaoMovie();
+			movieDao = new MovieDao();
 		}
-		movieList = new ArrayList<DtoMovie>();
+		movieList = new ArrayList<MovieDto>();
 		return movieDao;
 	}
 	
-	public List<DtoMovie> getMovieList(){
+	public List<MovieDto> getMovieList(){
 		return movieList;
 	}
 	
 	/*--------------------------------------------------*/
 	
 	//모든 영화 리스트 형태로 가져오기
-	public List<DtoMovie> movieList() throws SQLException, ClassNotFoundException {
+	public List<MovieDto> movieList() throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieList()");
 		String sql = "SELECT * FROM movies WHERE isActive = 'y' ORDER BY registerDate DESC, title ASC;";
 		
@@ -39,7 +39,7 @@ public class DaoMovie extends DAO {
 		movieList = getMovieList();
 		
 		while(rs.next()){
-			DtoMovie movie = new DtoMovie();
+			MovieDto movie = new MovieDto();
 			movie.setMovieCode(rs.getInt("movieCode"))
 				 .setTitle(rs.getString("title"))
 				 .setDirector(rs.getString("director"))
@@ -61,7 +61,7 @@ public class DaoMovie extends DAO {
 	}
 	
 	//DB에 영화 삽입하기
-	public void movieUpload(DtoMovie movie) throws SQLException, ClassNotFoundException {
+	public void movieUpload(MovieDto movie) throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieInsert()");
 		String sql = "INSERT INTO movies(movieCode, title, director, actors, genre, content, runningTime, rating, score, moviePoster, registerDate, isActive) "
 			+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, now(), ?);";
@@ -90,8 +90,8 @@ public class DaoMovie extends DAO {
 	}
 	
 	//movieCode 값으로 컬럼값을 조회하는 메소드
-	public DtoMovie movieSearchByCode(int movieCode) throws SQLException, ClassNotFoundException {
-		DtoMovie movie = null;
+	public MovieDto movieSearchByCode(int movieCode) throws SQLException, ClassNotFoundException {
+		MovieDto movie = null;
 		System.out.println("MovieDao - movieSearchByCode()");
 		String sql = "SELECT * FROM movies WHERE movieCode = "+ movieCode+";";
 		
@@ -101,7 +101,7 @@ public class DaoMovie extends DAO {
 		rs = pstmt.executeQuery();
 
 		if(rs.next()){
-			movie = new DtoMovie();
+			movie = new MovieDto();
 			movie.setMovieCode(rs.getInt("movieCode"))
 				 .setTitle(rs.getString("title"))
 				 .setDirector(rs.getString("director"))
@@ -121,7 +121,7 @@ public class DaoMovie extends DAO {
 	}
 	
 	//movie 내용 수정하는 메소드
-	public void movieUpdate(DtoMovie movie, int movieCode) throws SQLException, ClassNotFoundException {
+	public void movieUpdate(MovieDto movie, int movieCode) throws SQLException, ClassNotFoundException {
 		System.out.println("MovieDao - movieEdit()");
 		String sql = "UPDATE movies SET movieCode = ?, title = ?, director = ?, actors = ?, genre = ?, "
 				+ "content = ?, runningTime = ?, rating = ?, score = ?, moviePoster = ?, registerDate=now() "

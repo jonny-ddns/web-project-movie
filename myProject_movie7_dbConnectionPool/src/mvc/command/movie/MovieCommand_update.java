@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import mvc.db.dao.DaoMovie;
-import mvc.db.dto.DtoMovie;
+import mvc.db.dao.MovieDao;
+import mvc.db.dto.MovieDto;
 
 public class MovieCommand_update implements MovieCommand{
 	@Override
@@ -51,7 +51,7 @@ public class MovieCommand_update implements MovieCommand{
 			int movieCode = Integer.parseInt(multi.getParameter("movieCode"));
 			
 			//업데이트할 객체 생성하기
-			DtoMovie movie = new DtoMovie();
+			MovieDto movie = new MovieDto();
 			movie.setMovieCode(movieCode)
 				 .setTitle(multi.getParameter("title"))
 				 .setDirector(multi.getParameter("director"))
@@ -65,7 +65,7 @@ public class MovieCommand_update implements MovieCommand{
 				 .setIsActive("y");
 			request.setAttribute("movie", movie);
 			
-			DaoMovie mdao = DaoMovie.getInstance();
+			MovieDao mdao = MovieDao.getInstance();
 			mdao.movieUpdate(movie, movieCodeBefore);
 			
 			request.setAttribute("movieCode", movieCode);

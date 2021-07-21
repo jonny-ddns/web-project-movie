@@ -1,6 +1,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="mvc.db.dto.DtoBoard"%>
+<%@page import="mvc.db.dto.BoardDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
@@ -8,9 +8,9 @@
 	String contextPath = request.getContextPath();	
 	
 	//날짜 표시하기
-	List<DtoBoard> boardList = null;
+	List<BoardDto> boardList = null;
 	if(request.getAttribute("boardList") != null){
-		boardList = (List<DtoBoard>) request.getAttribute("boardList");
+		boardList = (List<BoardDto>) request.getAttribute("boardList");
 	}
 	int artiNum = 0;
 	String artiDate = "";
@@ -105,11 +105,11 @@
 				<th class="thClass" id="thArtiDate">작성날짜</th>
 			</tr>
 			<%
-				for(DtoBoard board : boardList){
-						artiNum = board.getArtiNum();
-						artiTitle = board.getArtiTitle();
-						writer = board.getWriter();
-						artiDate = board.getArtiDate();
+				for(BoardDto board : boardList){
+							artiNum = board.getArtiNum();
+							artiTitle = board.getArtiTitle();
+							writer = board.getWriter();
+							artiDate = board.getArtiDate();
 			%>		
 				<tr>
 					<td class="tdClass" id="tdArtiNum"><%= artiNum %></td>

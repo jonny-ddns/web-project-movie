@@ -1,11 +1,11 @@
 <%@page import="java.util.List"%>
-<%@page import="mvc.db.dto.DtoMovie"%>
+<%@page import="mvc.db.dto.MovieDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieList.jsp");
 	String contextPath = request.getContextPath();
 
-	List<DtoMovie> list = (List) request.getAttribute("movieList");
+	List<MovieDto> list = (List) request.getAttribute("movieList");
 	
 	int movieCode	= 0;
 	String title	= "";
@@ -47,15 +47,15 @@
 	<h1>movie list</h1>		
 	<h3 style="text-align: right; margin-right: 150px;"><a href="./movieForm_new.jsp">영화 신규등록하기</a></h3>
 	<%
-		for(DtoMovie movie : list){
-			movieCode	= movie.getMovieCode();
-			title 		= movie.getTitle();
-			genre 		= movie.getGenre();
-			director 	= movie.getDirector();
-			actors 		= movie.getActors();
-			runningTime = movie.getRunningTime();
-			rating 		= movie.getRating();
-			score 		= movie.getScore();
+		for(MovieDto movie : list){
+		movieCode	= movie.getMovieCode();
+		title 		= movie.getTitle();
+		genre 		= movie.getGenre();
+		director 	= movie.getDirector();
+		actors 		= movie.getActors();
+		runningTime = movie.getRunningTime();
+		rating 		= movie.getRating();
+		score 		= movie.getScore();
 	%>	
 
 	<table>	

@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import mvc.db.dao.DaoBoard;
-import mvc.db.dto.DtoBoard;
-import mvc.db.dto.DtoMember;
+import mvc.db.dao.BoardDao;
+import mvc.db.dto.BoardDto;
+import mvc.db.dto.MemberDto;
 
 public class BoardCommand_write implements BoardCommand{
 	@Override
@@ -21,7 +21,7 @@ public class BoardCommand_write implements BoardCommand{
 			request.setCharacterEncoding("UTF-8");			
 			
 			HttpSession session = request.getSession();
-			DtoMember member = (DtoMember) session.getAttribute("memberLogin");
+			MemberDto member = (MemberDto) session.getAttribute("memberLogin");
 			String id = member.getId();
 			
 			/*-----------------------------------------------------------------
@@ -34,7 +34,7 @@ public class BoardCommand_write implements BoardCommand{
 			Enumeration<?> files	= multi.getFileNames();
 			String fName			= (String) files.nextElement();
 			String boardImage		= multi.getFilesystemName(fName);
-			DtoBoard board 			= new DtoBoard();
+			BoardDto board 			= new BoardDto();
 			
 			board.setArtiTitle(multi.getParameter("title"))
 				 .setWriter(id)
@@ -42,7 +42,7 @@ public class BoardCommand_write implements BoardCommand{
 				 .setImage(boardImage)
 				 .setContent(multi.getParameter("content"))
 				 .setIsActive("y");
-			DaoBoard dao = DaoBoard.getInstance();
+			BoardDao dao = BoardDao.getInstance();
 			dao.boardWrite(board);
 			
 			System.out.println("BoardCommand_write() end");

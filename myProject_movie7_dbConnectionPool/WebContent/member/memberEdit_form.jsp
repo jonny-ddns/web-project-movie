@@ -1,9 +1,9 @@
-<%@page import="mvc.db.dto.DtoMember"%>
+<%@page import="mvc.db.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>memberEdit_form.jsp");
 
-	DtoMember member = (DtoMember) session.getAttribute("memberLogin");
+	MemberDto member = (MemberDto) session.getAttribute("memberLogin");
 	String id = member.getId();
 	String name = member.getName();
 	String email = member.getEmail();

@@ -4,28 +4,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import mvc.db.DBConnectionPool;
-import mvc.db.dto.DtoBoard;
+import mvc.db.dto.BoardDto;
 
-public class DaoBoard extends DAO {
-	private static DaoBoard boardDao	= null;
-	private static List<DtoBoard> boardList = null;
+public class BoardDao extends DAO {
+	private static BoardDao boardDao	= null;
+	private static List<BoardDto> boardList = null;
 	
-	private DaoBoard(){ }
+	private BoardDao(){ }
 	
-	public static DaoBoard getInstance() {
+	public static BoardDao getInstance() {
 		if(boardDao == null) {
-			boardDao = new DaoBoard();
+			boardDao = new BoardDao();
 		}
-		boardList = new ArrayList<DtoBoard>();
+		boardList = new ArrayList<BoardDto>();
 		return boardDao;
 	}
 	
-	public List<DtoBoard> getBoardList(){
+	public List<BoardDto> getBoardList(){
 		return boardList;
 	}
 	
 	/*----------------------------------*/
-	public List<DtoBoard> getBoardAll() throws SQLException, ClassNotFoundException {
+	public List<BoardDto> getBoardAll() throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - getBoardAll()");
 		String sql = "SELECT * FROM board WHERE isActive='y' ORDER BY artiNum DESC;";
 	
@@ -34,11 +34,11 @@ public class DaoBoard extends DAO {
 		pstmt 	= conn.prepareStatement(sql);
 		rs 		= pstmt.executeQuery();
 		
-		List<DtoBoard> boardList = getBoardList();
-		DtoBoard board;
+		List<BoardDto> boardList = getBoardList();
+		BoardDto board;
 		
 		while(rs.next()){
-			board = new DtoBoard();
+			board = new BoardDto();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -63,7 +63,7 @@ public class DaoBoard extends DAO {
 		return isVefied;
 	}
 
-	public void boardWrite(DtoBoard board) throws SQLException, ClassNotFoundException {
+	public void boardWrite(BoardDto board) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardWrite()");
 		String sql = "INSERT INTO board(artiTitle, writer, artiDate, openPublic, image, content, isActive) "
 				+ "VALUES(?, ?, now(), ?, ?, ?, 'y');";
@@ -85,7 +85,7 @@ public class DaoBoard extends DAO {
 		System.out.println("boardWrite - end");
 	}
 	
-	public DtoBoard boardSearchByArtiNum(int artiNum) throws SQLException, ClassNotFoundException {
+	public BoardDto boardSearchByArtiNum(int artiNum) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardSearchByArtiNum()");
 		String sql = "SELECT * FROM board WHERE artiNum='"+ artiNum+ "';";
 		
@@ -94,9 +94,9 @@ public class DaoBoard extends DAO {
 		pstmt	= conn.prepareStatement(sql);
 		rs 		= pstmt.executeQuery();
 		
-		DtoBoard board = null;
+		BoardDto board = null;
 		if(rs.next()) {
-			board = new DtoBoard();
+			board = new BoardDto();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -113,7 +113,7 @@ public class DaoBoard extends DAO {
 		return board;
 	}
 
-	public DtoBoard boardSearchByID(String id) throws SQLException, ClassNotFoundException {
+	public BoardDto boardSearchByID(String id) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardSearchByID()");
 		String sql = "SELECT * FROM board WHERE id='"+ id+ "';";
 		
@@ -122,9 +122,9 @@ public class DaoBoard extends DAO {
 		pstmt	= conn.prepareStatement(sql);
 		rs		= pstmt.executeQuery();
 		
-		DtoBoard board = null;
+		BoardDto board = null;
 		if(rs.next()) {
-			board = new DtoBoard();
+			board = new BoardDto();
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
@@ -141,7 +141,7 @@ public class DaoBoard extends DAO {
 		return board;
 	}
 
-	public void boardEdit(DtoBoard board, String id) {
+	public void boardEdit(BoardDto board, String id) {
 	}
 
 	public void boardDelete(String id) {
