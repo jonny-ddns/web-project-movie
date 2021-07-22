@@ -9,7 +9,6 @@
 	h1{
 		text-align: center;
 	}
-
 	#form_signin{
 		text-align: center;
 	}

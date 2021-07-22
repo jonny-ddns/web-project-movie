@@ -1,7 +1,15 @@
+<%@page import="mvc.db.dto.MemberDto"%>
 <%@page import="mvc.db.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>boardRead.jsp");
+
+	MemberDto member = (MemberDto) session.getAttribute("memberLogin");
+	boolean isWriter = false;
+	if(member.getId().equals(request.getParameter("writer"))){
+		isWriter = true;
+	}
+
 	BoardDto board = (BoardDto) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
 	String artiDate = board.getArtiDate();
@@ -14,7 +22,6 @@
 <head>
 <meta charset="UTF-8">
 <title>board read</title>
-
 <style>
 	h1{
 		text-align: center;
@@ -49,8 +56,7 @@
 	}
 	#th_writer{
 	 	text-align: left;
-	 	padding-left: 10px;
-	
+	 	padding-left: 10px;	
 	}
 	#th_artiDate{
 		text-align: right;
@@ -60,16 +66,18 @@
 	.tr_content{
 		height: 200px;
 	}
-	
-
 </style>
-
 </head>
 <body>
 	<h1>board read</h1>
 	<div class="div_button">
-		<a href="./edit.co?artiNum='<%= artiNum %>'">수정</a>&emsp;&emsp;
-		<a href="./delete.co?artiNum='<%= artiNum %>'">삭제</a>
+	<% 
+		if(isWriter){ 
+	%>	
+			<a href="./edit.co?artiNum=<%= artiNum %>">수정</a>&emsp;
+	<%
+		} 
+	%>
 	</div>
 	<table>
 		<tr>

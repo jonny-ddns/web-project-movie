@@ -87,13 +87,14 @@ public class BoardDao extends DAO {
 	
 	public BoardDto boardSearchByArtiNum(int artiNum) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardSearchByArtiNum()");
-		String sql = "SELECT * FROM board WHERE artiNum='"+ artiNum+ "';";
+		String sql = "SELECT * FROM board WHERE artiNum=?;";	
 		
 		dbcp 	= DBConnectionPool.getInstance();
-		conn 	= dbcp.getConnection();
+		conn	= dbcp.getConnection();
 		pstmt	= conn.prepareStatement(sql);
-		rs 		= pstmt.executeQuery();
-		
+		pstmt.setInt(1, artiNum);
+		rs		= pstmt.executeQuery();
+				
 		BoardDto board = null;
 		if(rs.next()) {
 			board = new BoardDto();
@@ -140,6 +141,9 @@ public class BoardDao extends DAO {
 		System.out.println("boardSearchByID - end");
 		return board;
 	}
+	
+	
+	
 
 	public void boardEdit(BoardDto board, String id) {
 	}
