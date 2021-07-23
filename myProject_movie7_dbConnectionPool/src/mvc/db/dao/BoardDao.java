@@ -7,9 +7,9 @@ import mvc.db.DBConnectionPool;
 import mvc.db.dto.BoardDto;
 
 public class BoardDao extends DAO {
-	private static BoardDao boardDao	= null;
+	private static BoardDao boardDao		= null;
 	private static List<BoardDto> boardList = null;
-	
+		
 	private BoardDao(){ }
 	
 	public static BoardDao getInstance() {
@@ -24,7 +24,7 @@ public class BoardDao extends DAO {
 		return boardList;
 	}
 	
-	/*----------------------------------*/
+	/*------------------------------------------------------------------------*/
 	public List<BoardDto> getBoardAll() throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - getBoardAll()");
 		String sql = "SELECT * FROM board WHERE isActive='y' ORDER BY artiNum DESC;";
@@ -42,7 +42,7 @@ public class BoardDao extends DAO {
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
-				 .setArtiDate(rs.getTimestamp("artiDate").toString())
+				 .setWriteDate(rs.getTimestamp("writeDate").toString())
 				 .setOpenPublic(rs.getString("openPublic"))
 				 .setImage(rs.getString("image"))
 				 .setContent(rs.getString("content"))
@@ -57,15 +57,9 @@ public class BoardDao extends DAO {
 		return boardList;
 	}
 
-	public boolean boardVerify(String id, String pw) {
-		System.out.println("BoardDao - boardVerify()");
-		boolean isVefied = false;
-		return isVefied;
-	}
-
 	public void boardWrite(BoardDto board) throws SQLException, ClassNotFoundException {
 		System.out.println("BoardDao - boardWrite()");
-		String sql = "INSERT INTO board(artiTitle, writer, artiDate, openPublic, image, content, isActive) "
+		String sql = "INSERT INTO board(artiTitle, writer, writeDate, openPublic, image, content, isActive) "
 				+ "VALUES(?, ?, now(), ?, ?, ?, 'y');";
 		
 		dbcp	= DBConnectionPool.getInstance();
@@ -101,7 +95,7 @@ public class BoardDao extends DAO {
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
-				 .setArtiDate(rs.getString("artiDate").toString())
+				 .setWriteDate(rs.getString("writeDate").toString())
 				 .setOpenPublic(rs.getString("openPublic"))
 				 .setImage(rs.getString("image"))
 				 .setContent(rs.getString("content"))
@@ -130,7 +124,7 @@ public class BoardDao extends DAO {
 			board.setArtiNum(Integer.parseInt(rs.getString("artiNum")))
 				 .setArtiTitle(rs.getString("artiTitle"))
 				 .setWriter(rs.getString("writer"))
-				 .setArtiDate(rs.getString("artiDate").toString())
+				 .setWriteDate(rs.getString("writeDate").toString())
 				 .setOpenPublic(rs.getString("openPublic"))
 				 .setImage(rs.getString("image"))
 				 .setContent(rs.getString("content"))
@@ -142,19 +136,17 @@ public class BoardDao extends DAO {
 
 		System.out.println("boardSearchByID - end");
 		return board;
-	}
-	
+	}	
 	
 	public void boardUpdate(BoardDto board, int artiNum) throws SQLException, ClassNotFoundException{
 		System.out.println("BoardDao - boardUpdate()");
-		String sql = "UPDATE board SET artiTitle=?, content=?, artiDate=? WHERE id=?;";
+		String sql = "UPDATE board SET artiTitle=?, content=?, modifyDate=now() WHERE artiNum=?;";
 		
 		dbcp 	= DBConnectionPool.getInstance();
 		conn	= dbcp.getConnection();
 		pstmt	= conn.prepareStatement(sql);
 		pstmt.setString(1, board.getArtiTitle());
 		pstmt.setString(2, board.getContent());
-		//수정시간 세팅
 		pstmt.setInt(3, artiNum);
 		pstmt.executeUpdate();
 		
@@ -164,6 +156,18 @@ public class BoardDao extends DAO {
 		System.out.println("boardUpdate - end");
 	}
 
-	public void boardDelete(String id) {
+	public void boardDelete(int artiNum) throws SQLException, ClassNotFoundException{
+		System.out.println("BoardDao - boardUpdate()");
+		String sql = "UPDATE board SET isActive='n' WHERE artiNum=?";
+		
+		dbcp 	= DBConnectionPool.getInstance();
+		conn	= dbcp.getConnection();
+		pstmt	= conn.prepareStatement(sql);
+		pstmt.executeUpdate();
+
+		if(pstmt != null) { pstmt.close(); }
+		if(conn != null) { conn.close(); }
+		
+		System.out.println("boardUpdate() - end");
 	}
 }

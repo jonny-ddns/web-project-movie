@@ -11,40 +11,14 @@
 <meta charset="UTF-8">
 <title>board write</title>
 <style type="text/css">
-	h1{
-		text-align: center;
-		margin-bottom: 50px;
-	}	
-	.writeCancel{
-		padding-left: 400px;
-		text-align: center;
-	}
-	.tblWrite{
-		margin: auto;
-		border: 1px solid black;
-		padding-top: 20px;
-		padding-right: 20px;
-		padding-bottom: 30px;
-		padding-left: 20px;
-	}
-	.trTitle{
-		height: 60px;
-	}
-	.tdTitle{
-		text-align: center;
-		width: 150px;
-	}
-	.tdTitle_input{
-		text-align: right;
-	}
-	.tdSelect{
-		text-align: center;	
-	}
-	.tdSubmit{
-		width: 80px;
-		text-align: center;
-	}
-	
+	h1{ text-align: center; margin-bottom: 50px; }	
+	.writeCancel{ padding-left: 400px; text-align: center; }
+	.tblWrite{ margin: auto; border: 1px solid black; padding-top: 20px; padding-right: 20px; padding-bottom: 30px;	padding-left: 20px; }
+	.trTitle{ height: 60px; }
+	.tdTitle{ text-align: center; width: 150px; }
+	.tdTitle_input{ text-align: right; }
+	.tdSelect{ text-align: center; }
+	.tdSubmit{ width: 80px; text-align: center;	}
 </style>
 </head>
 <body>
@@ -65,7 +39,7 @@
 					</textarea>
 				</td>
 			</tr>
-			<tr >
+			<tr>
 				<td colspan="3" height="50px"><input type="file" name="attachment" ></td>
 			</tr>
 			<tr>

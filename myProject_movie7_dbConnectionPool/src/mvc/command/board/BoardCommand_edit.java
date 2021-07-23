@@ -11,6 +11,7 @@ public class BoardCommand_edit implements BoardCommand{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			System.out.println(">>BoardCommand_edit");
+			
 			BoardDao dao = BoardDao.getInstance();
 			BoardDto board = dao.boardSearchByArtiNum(
 								Integer.parseInt(request.getParameter("artiNum"))

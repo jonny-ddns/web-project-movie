@@ -77,7 +77,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardCommand_update 호출");
 			com = new BoardCommand_update();
 			com.execute(request, response);
-			viewPage = "./temp.jsp";
+			viewPage = "./board_temp.jsp";
 		}
 		else if(command.equals("delete")) {
 			System.out.println("BoardCommand_delete 호출");

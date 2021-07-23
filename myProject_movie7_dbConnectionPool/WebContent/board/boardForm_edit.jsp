@@ -52,10 +52,10 @@
 <body>
 	<h1>board edit</h1>	
 	<div class="writeCancel">
-		<h4><a href="./read.co?artiNum=<%= artiNum %>">수정취소 -> 다시 해당글로 넘어가기</a></h4>
+		<h4><a href="./read.co?artiNum=<%= artiNum %>">수정취소</a></h4>
 	</div>
-	<form action="./update.co" method="post">
-		<input type="hidden" name="memberId" value="">
+	<form action="./update.co" method="post" enctype="multipart/form-data">
+ 		<input type="hidden" name="artiNum" value="<%= artiNum %>">
 		<table class="tblWrite">
 			<tr class="trTitle">
 				<td class="tdTitle">TITLE</td>
@@ -67,6 +67,9 @@
 						<%= content %>
 					</textarea>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="3" height="50px"><input type="file" name="attachment" ></td>
 			</tr>
 			<tr>
 				<td class="tdSelect">
@@ -85,7 +88,7 @@
 					</select>
 				</td>
 				<td class="tdSubmit">
-					<input type="submit" value="작성 완료">
+					<input type="submit" value="수정 완료">
 				</td>
 			</tr>
 		</table>

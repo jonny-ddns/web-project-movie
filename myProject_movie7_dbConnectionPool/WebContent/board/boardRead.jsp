@@ -6,11 +6,10 @@
 
 	BoardDto board = (BoardDto) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
-	String artiDate = board.getArtiDate();
+	String artiDate = board.getWriteDate();
 	String artiTitle = board.getArtiTitle();
 	String content = board.getContent();
 	String writer = board.getWriter();
-
 
 	MemberDto member = null;
 	boolean isWriter = false;
@@ -20,8 +19,6 @@
 			isWriter = true;
 		}	
 	}
-
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -80,11 +77,15 @@
 	<% 
 		if(isWriter){ 
 	%>	
-			<a href="./edit.co?artiNum=<%= artiNum %>">수정</a>&emsp;
+			<form action="./edit.co" method="post">
+				<input type="hidden" name="artiNum" value="<%= artiNum %>">
+				<input type="submit" value="수정">
+			</form>
 	<%
 		} 
 	%>
 	</div>
+	<!-- 게시글 -->
 	<table>
 		<tr>
 			<th class="tr_header" id="th_title">TITLE</th>
@@ -98,6 +99,14 @@
 		<tr>
 			<td class="tr_content" colspan="3"><%= content %></td>
 		</tr>
-	</table>	
+	</table>
+	
+	<!-- 댓글 창 -->
+	<h1>댓글s</h1>
+	<table>
+		
+		
+	
+	</table>
 </body>
 </html>	

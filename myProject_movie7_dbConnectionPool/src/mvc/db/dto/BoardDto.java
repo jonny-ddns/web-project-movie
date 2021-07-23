@@ -4,7 +4,7 @@ public class BoardDto {
 	private int artiNum;
 	private String artiTitle;
 	private String writer;
-	private String artiDate;	
+	private String writeDate;	
 	private String openPublic;
 	private String image;
 	private String content;	
@@ -31,11 +31,11 @@ public class BoardDto {
 		this.writer = writer;
 		return this;
 	}
-	public String getArtiDate() {
-		return artiDate;
+	public String getWriteDate() {
+		return writeDate;
 	}
-	public BoardDto setArtiDate(String artiDate) {
-		this.artiDate = artiDate;
+	public BoardDto setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
 		return this;
 	}
 	public String getOpenPublic() {
