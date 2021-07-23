@@ -65,8 +65,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardCommand_edit 호출");
 			com = new BoardCommand_edit();
 			com.execute(request, response);
-			int artiNum = (int) request.getAttribute("artiNum");
-			viewPage = "./boardForm_edit.jsp?artiNum="+ artiNum;
+			viewPage = "./boardForm_edit.jsp";
 		}
 		else if(command.equals("write")) {
 			System.out.println("BoardCommand_write 호출");

@@ -1,7 +1,11 @@
+<%@page import="mvc.db.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
 	System.out.println(">>boardForm_edit.jsp");
-	String artiNum = request.getParameter("artiNum");
+	BoardDto board = (BoardDto)request.getAttribute("board");
+	int artiNum = board.getArtiNum();
+	String artiTitle = board.getArtiTitle();
+	String content = board.getContent();
 %>
 <!DOCTYPE html>
 <html>
@@ -46,7 +50,7 @@
 </style>
 </head>
 <body>
-	<h1>board write</h1>	
+	<h1>board edit</h1>	
 	<div class="writeCancel">
 		<h4><a href="./read.co?artiNum=<%= artiNum %>">수정취소 -> 다시 해당글로 넘어가기</a></h4>
 	</div>
@@ -55,11 +59,12 @@
 		<table class="tblWrite">
 			<tr class="trTitle">
 				<td class="tdTitle">TITLE</td>
-				<td class="tdTitle_input" colspan="2"><input type="text" name="title" size="40"></td>
+				<td class="tdTitle_input" colspan="2"><input type="text" name="title" size="40" value="<%= artiTitle %>"></td>
 			</tr>
 			<tr>
 				<td class="tdTextarea" colspan="3">
 					<textarea name="content" rows="12" cols="60">
+						<%= content %>
 					</textarea>
 				</td>
 			</tr>

@@ -113,7 +113,7 @@
 			%>		
 				<tr>
 					<td class="tdClass" id="tdArtiNum"><%= artiNum %></td>
-					<td class="tdClass" id="tdArtiTitle"><a href="./read.co?artiNum=<%= artiNum %>&writer=<%= writer %>"><%= artiTitle %></a></td>
+					<td class="tdClass" id="tdArtiTitle"><a href="./read.co?artiNum=<%= artiNum %>"><%= artiTitle %></a></td>
 					<td class="tdClass" id="tdWriter"><%= writer %></td>
 					<td class="tdClass" id="tdArtiDate"><%= artiDate %></td>				
 				</tr>					

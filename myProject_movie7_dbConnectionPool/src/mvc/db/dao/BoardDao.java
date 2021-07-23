@@ -107,6 +107,7 @@ public class BoardDao extends DAO {
 				 .setContent(rs.getString("content"))
 				 .setIsActive(rs.getString("isActive"));
 		}
+		if(rs != null) { rs.close(); }
 		if(pstmt != null) { pstmt.close(); }
 		if(conn != null) { conn.close(); }
 
@@ -135,6 +136,7 @@ public class BoardDao extends DAO {
 				 .setContent(rs.getString("content"))
 				 .setIsActive(rs.getString("isActive"));
 		}
+		if(rs != null) { rs.close(); }
 		if(pstmt != null) { pstmt.close(); }
 		if(conn != null) { conn.close(); }
 
@@ -143,9 +145,23 @@ public class BoardDao extends DAO {
 	}
 	
 	
-	
+	public void boardUpdate(BoardDto board, int artiNum) throws SQLException, ClassNotFoundException{
+		System.out.println("BoardDao - boardUpdate()");
+		String sql = "UPDATE board SET artiTitle=?, content=?, artiDate=? WHERE id=?;";
+		
+		dbcp 	= DBConnectionPool.getInstance();
+		conn	= dbcp.getConnection();
+		pstmt	= conn.prepareStatement(sql);
+		pstmt.setString(1, board.getArtiTitle());
+		pstmt.setString(2, board.getContent());
+		//수정시간 세팅
+		pstmt.setInt(3, artiNum);
+		pstmt.executeUpdate();
+		
+		if(pstmt != null) { pstmt.close(); }
+		if(conn != null) { conn.close(); }
 
-	public void boardEdit(BoardDto board, String id) {
+		System.out.println("boardUpdate - end");
 	}
 
 	public void boardDelete(String id) {

@@ -4,18 +4,24 @@
 <%
 	System.out.println(">>boardRead.jsp");
 
-	MemberDto member = (MemberDto) session.getAttribute("memberLogin");
-	boolean isWriter = false;
-	if(member.getId().equals(request.getParameter("writer"))){
-		isWriter = true;
-	}
-
 	BoardDto board = (BoardDto) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
 	String artiDate = board.getArtiDate();
 	String artiTitle = board.getArtiTitle();
 	String content = board.getContent();
 	String writer = board.getWriter();
+
+
+	MemberDto member = null;
+	boolean isWriter = false;
+	if(session.getAttribute("memberLogin") != null){
+		member = (MemberDto) session.getAttribute("memberLogin");
+		if(member.getId().equals(writer)){
+			isWriter = true;
+		}	
+	}
+
+	
 %>
 <!DOCTYPE html>
 <html>
