@@ -83,7 +83,7 @@ public class BoardController extends HttpServlet {
 			System.out.println("BoardCommand_delete 호출");
 			com = new BoardCommand_delete();
 			com.execute(request, response);
-			viewPage = "./temp.jsp";
+			viewPage = "./board_temp.jsp";
 		}
 		else {
 			System.out.println("--error : 요청정보를 찾지못함");

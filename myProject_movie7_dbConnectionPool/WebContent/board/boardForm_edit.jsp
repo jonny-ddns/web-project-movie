@@ -13,46 +13,21 @@
 <meta charset="UTF-8">
 <title>board write</title>
 <style type="text/css">
-	h1{
-		text-align: center;
-		margin-bottom: 50px;
-	}	
-	.writeCancel{
-		padding-left: 400px;
-		text-align: center;
-	}
-	.tblWrite{
-		margin: auto;
-		border: 1px solid black;
-		padding-top: 20px;
-		padding-right: 20px;
-		padding-bottom: 30px;
-		padding-left: 20px;
-	}
-	.trTitle{
-		height: 60px;
-	}
-	.tdTitle{
-		text-align: center;
-		width: 150px;
-	}
-	.tdTitle_input{
-		text-align: right;
-	}
-	.tdSelect{
-		text-align: center;	
-	}
-	.tdSubmit{
-		width: 80px;
-		text-align: center;
-	}
-	
+	h1{ text-align: center; margin-bottom: 50px; }	
+	.writeCancel{ padding-bottom: 20px; text-align: center; }
+	.tblWrite{ margin: auto; border: 1px solid black; padding-top: 20px; padding-right: 20px; padding-bottom: 30px; padding-left: 20px; }
+	.trTitle{ height: 60px; }
+	.tdTitle{ text-align: center; width: 150px; }
+	.tdTitle_input{ text-align: right; }
+	.tdSelect{ text-align: center; }
+	.tdSubmit{ width: 80px; text-align: center;	}
 </style>
 </head>
 <body>
 	<h1>board edit</h1>	
-	<div class="writeCancel">
-		<h4><a href="./read.co?artiNum=<%= artiNum %>">수정취소</a></h4>
+	<div class="writeCancel">		
+		<a href="./read.co?artiNum=<%= artiNum %>">취소</a>&emsp;&emsp;
+		<a href="./delete.co?artiNum=<%= artiNum %>">삭제</a>
 	</div>
 	<form action="./update.co" method="post" enctype="multipart/form-data">
  		<input type="hidden" name="artiNum" value="<%= artiNum %>">

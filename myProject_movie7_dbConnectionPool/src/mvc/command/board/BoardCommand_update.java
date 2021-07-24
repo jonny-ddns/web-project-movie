@@ -20,12 +20,10 @@ public class BoardCommand_update implements BoardCommand{
 			System.out.println(">>BoardCommand_update()");
 			request.setCharacterEncoding("UTF-8");
 			
-			System.out.println("1");
 			HttpSession session = request.getSession();
 			MemberDto member = (MemberDto) session.getAttribute("memberLogin");
 			String id = member.getId();
 			
-			System.out.println("2");
 			/*-----------------------------------------------------------------
 				upload image file from <form> by using "MultipartRequest"
 			-----------------------------------------------------------------*/
@@ -33,14 +31,11 @@ public class BoardCommand_update implements BoardCommand{
 			int fileLimit = 1000*1024*1024;
 			MultipartRequest multi = new MultipartRequest( request, savePath, fileLimit, "UTF-8", new DefaultFileRenamePolicy() );
 		
-			System.out.println("3");
 			Enumeration<?> files	= multi.getFileNames();
 			String fName			= (String) files.nextElement();
 			String boardImage		= multi.getFilesystemName(fName);
 			BoardDto board 			= new BoardDto();
 			
-			
-			System.out.println("4");
 			//artiNum 가져오기
 			int artiNum = Integer.parseInt(multi.getParameter("artiNum"));
 			
