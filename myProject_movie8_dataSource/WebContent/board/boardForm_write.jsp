@@ -11,40 +11,14 @@
 <meta charset="UTF-8">
 <title>board write</title>
 <style type="text/css">
-	h1{
-		text-align: center;
-		margin-bottom: 50px;
-	}	
-	.writeCancel{
-		padding-left: 400px;
-		text-align: center;
-	}
-	.tblWrite{
-		margin: auto;
-		border: 1px solid black;
-		padding-top: 20px;
-		padding-right: 20px;
-		padding-bottom: 30px;
-		padding-left: 20px;
-	}
-	.trTitle{
-		height: 60px;
-	}
-	.tdTitle{
-		text-align: center;
-		width: 150px;
-	}
-	.tdTitle_input{
-		text-align: right;
-	}
-	.tdSelect{
-		text-align: center;	
-	}
-	.tdSubmit{
-		width: 80px;
-		text-align: center;
-	}
-	
+	h1{ text-align: center; margin-bottom: 50px; }	
+	.writeCancel{ padding-left: 400px; text-align: center; }
+	.tblWrite{ margin: auto; border: 1px solid black; padding-top: 20px; padding-right: 20px; padding-bottom: 30px;	padding-left: 20px; }
+	.trTitle{ height: 60px; }
+	.tdTitle{ text-align: center; width: 150px; }
+	.tdTitle_input{ text-align: right; }
+	.tdSelect{ text-align: center; }
+	.tdSubmit{ width: 80px; text-align: center;	}
 </style>
 </head>
 <body>
@@ -52,7 +26,7 @@
 	<div class="writeCancel">
 		<h4><a href="./list.co">글쓰기 취소</a></h4>
 	</div>
-	<form action="./upload.co" method="post">
+	<form action="./write.co" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="memberId" value="">
 		<table class="tblWrite">
 			<tr class="trTitle">
@@ -64,6 +38,9 @@
 					<textarea name="content" rows="12" cols="60">
 					</textarea>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="3" height="50px"><input type="file" name="attachment" ></td>
 			</tr>
 			<tr>
 				<td class="tdSelect">

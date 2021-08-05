@@ -1,47 +1,46 @@
-<%@page import="mvc.db.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	System.out.println(">>memberEdit_form.jsp");
-
-	MemberDto member = (MemberDto) session.getAttribute("memberLogin");
-	String id = member.getId();
-	String name = member.getName();
-	String email = member.getEmail();
+<% 
+	System.out.println("memberSearch.jsp");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memberEdit form</title>
+
+<title>member search</title>
+<style type="text/css">
+	h1{text-align: center;}
+	
+	.tab_button{text-align: center;}
+	
+	input[type="radio"]{display:none;}	input[type="radio"]+label{display:inline-block;width:150px;padding:20px;background:#ccc;color:#000000;font-size:14px;cursor:pointer;}
+	input[type="radio"]:checked +label{background:#696969;color:#FFFFFF;}
+	
+	.conbox{width:500px;height:600px;background:#FFFFFF;margin:0 auto;display:none}
+	
+	input[id="tab_id"]:checked ~ .con_id{display: block;}
+	input[id="tab_pw"]:checked ~ .con_pw{display: block;}
+	
+	.intputName{width: 200px;}
+	.inputBirth{width: 100px;}	
+	.inputEmail{width: 200px;}	
+</style>
 </head>
 <body>
-	<h1>memberEdit form</h1>
-	
-	<form action="memberEdit.bo" method="post">
-		<table>
-			<tr>
-				<td><input type="hidden" name="id" value="<%= id %>"></td>
-			</tr>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" value="<%= id %>" readonly="readonly"></td>
-				
-			</tr>
-			<tr>
-				<td>PW</td>
-				<td><input type="password" name="pw" ></td>
-			</tr>			
-			<tr>
-				<td>NAME</td>
-				<td><input type="text" name="name" value="<%= name %>"></td>
-			</tr>			
-			<tr>
-				<td>EMAIL</td>
-				<td><input type="text" name="email" value="<%= email %>"></td>
-			</tr>			
-			<tr>
-				<td>BIRTH</td>
-				<td><select name="birthyear">
+	<h1>member search</h1>
+	<div class="tab_button">
+		<input type="radio" name="tabmenu" id="tab_id" checked>
+		<label for="tab_id">아이디 찾기</label>		
+		<input type="radio" name="tabmenu" id="tab_pw">
+		<label for="tab_pw">비밀번호 찾기</label>
+		
+		<div class="conbox con_id">
+			<h3>find ID</h3>
+			<div class="inputName">
+				<input type="text" class="inputName" name="inputName" value="Full name">
+			</div>
+			<div class="inputBirth">
+				<select class="birth" id="birthyear" name="birthyear">
 					<option value="2021">2021</option>
 					<option value="2020">2020</option>
 					<option value="2019">2019</option>
@@ -164,41 +163,55 @@
 					<option value="1902">1902</option>
 					<option value="1901">1901</option>
 					<option value="1900">1900</option>	
-				</select></td>
-			</tr>			
-			<tr>
-				<td>GENDER</td>
-				<td>
-					<input type="radio" name="gender" value="m">남성
-					<input type="radio" name="gender" value="f">여성
-					<input type="radio" name="gender" value="x">기타
-				</td>
-			</tr>			
-			<tr>
-				<td>INTEREST</td>
-				<td>
-					<input type="checkbox" name="interest" value="action" >액션<br>
-					<input type="checkbox" name="interest" value="crime">범죄<br>
-					<input type="checkbox" name="interest" value="mistery">미스터리<br>
-					<input type="checkbox" name="interest" value="SF">SF<br>
-					<input type="checkbox" name="interest" value="comedy">코미디<br>
-					<input type="checkbox" name="interest" value="thriller">스릴러<br>
-					<input type="checkbox" name="interest" value="horror">공포<br>
-					<input type="checkbox" name="interest" value="war">전쟁물<br>
-					<input type="checkbox" name="interest" value="sports">스포츠<br>
-					<input type="checkbox" name="interest" value="fantasy">판타지<br>
-					<input type="checkbox" name="interest" value="teenager">청춘물<br>
-					<input type="checkbox" name="interest" value="drama">드라마<br>
-					<input type="checkbox" name="interest" value="romantic">로맨스<br>
-					<input type="checkbox" name="interest" value="music">음악<br>
-					<input type="checkbox" name="interest" value="documentary">다큐멘터리<br>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit" value="Submit"></td>
-			</tr>			
-		</table>
-	</form>	
-	<a href="memberDelete.bo?id=<%= id %>">회원탈퇴하기</a>
+				</select>
+										
+				<select class="birth" id="birthmonth" name="birthmonth">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+					<option value="31">31</option>				
+				</select>	
+			</div>
+			<div class="inputEmail">
+				<input class="email" type="text" name="email" >
+			</div>				
+		</div>
+		<div class="conbox con_pw">
+			<h3>find PW</h3>
+			<div class="inputName">
+				<input type="text" class="name" name="name" value="ID">
+			</div>
+			<div class="inputEmail">
+				<input class="email" type="text" name="email" >
+			</div>
+		</div>
+	</div>	
 </body>
 </html>

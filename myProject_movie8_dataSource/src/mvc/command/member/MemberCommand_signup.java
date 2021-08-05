@@ -3,8 +3,8 @@ package mvc.command.member;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mvc.db.dao.DaoMember;
-import mvc.db.dto.DtoMember;
+import mvc.db.dao.MemberDao;
+import mvc.db.dto.MemberDto;
 
 public class MemberCommand_signup implements MemberCommand {
 	@Override
@@ -17,7 +17,7 @@ public class MemberCommand_signup implements MemberCommand {
 				interest += (", "+ st);
 			}
 			
-			DtoMember member = new DtoMember();
+			MemberDto member = new MemberDto();
 			member.setId(request.getParameter("id"))
 				  .setPassword(request.getParameter("pw"))
 				  .setName(request.getParameter("name"))
@@ -26,16 +26,16 @@ public class MemberCommand_signup implements MemberCommand {
 				  .setGender(request.getParameter("gender"))
 				  .setInterest(interest)
 				  .setIsActive("y");
-			DaoMember mdao = DaoMember.getInstance();
+			MemberDao mdao = MemberDao.getInstance();
 			mdao.memberInsert(member);
 			
 			System.out.println("MemberCommand_signup() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
-			sqle.getMessage();
+			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

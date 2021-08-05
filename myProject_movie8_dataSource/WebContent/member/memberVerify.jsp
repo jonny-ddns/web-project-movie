@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% System.out.println("memberVerify.jsp"); %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member edit</title>
+<title>member verify</title>
+<style type="text/css">
+	h1{text-align: center;}
+	.input_pw{text-align:center; padding:3px;}
+</style>
 </head>
 <body>
-	<h1>member edit</h1>
+	<h1>member verify</h1>
 	
-	<div><label>비밀번호 입력 확인</label></div>
-	<div>
+	<div class="input_pw"><label>비밀번호를 다시 입력하세요</label></div>
+	<div class="input_pw">
 		<form action="compare.bo" method="post">
 			<input type="password" name="pw">
 			<input type="submit" value="확인">

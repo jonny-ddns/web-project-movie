@@ -1,13 +1,13 @@
 <%@page import="java.util.Date"%>
-<%@page import="mvc.db.dto.DtoMember"%>
+<%@page import="mvc.db.dto.MemberDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>memberView.jsp");
 
-	List<DtoMember> memberList = null;
+	List<MemberDto> memberList = null;
 	if(request.getAttribute("memberList") != null){
-		memberList = (List<DtoMember>) request.getAttribute("memberList");
+		memberList = (List<MemberDto>) request.getAttribute("memberList");
 	}
 	
 	String id;
@@ -67,17 +67,17 @@
 			<th class="th">isActive</th>	
 		</tr>
 	<%
-		for(DtoMember member : memberList){
-		id = member.getId();
-		password = member.getPassword();
-		name = member.getName();
-		email = member.getEmail();
-		birthyear = member.getBirthyear();
-		gender = member.getGender();
-		interest = member.getInterest();
-		joinDate = member.getJoinDate();
-		updateDate = member.getUpdateDate();
-		isActive = member.getIsActive();
+		for(MemberDto member : memberList){
+			id = member.getId();
+			password = member.getPassword();
+			name = member.getName();
+			email = member.getEmail();
+			birthyear = member.getBirthyear();
+			gender = member.getGender();
+			interest = member.getInterest();
+			joinDate = member.getJoinDate();
+			updateDate = member.getUpdateDate();
+			isActive = member.getIsActive();
 	%>
 		<tr>
 			<td class="td"><%= id %></td>

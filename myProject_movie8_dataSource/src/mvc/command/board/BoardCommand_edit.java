@@ -1,21 +1,23 @@
-package mvc.command.member;
+package mvc.command.board;
 
 import java.sql.SQLException;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mvc.db.dao.MemberDao;
-import mvc.db.dto.MemberDto;
+import mvc.db.dao.BoardDao;
+import mvc.db.dto.BoardDto;
 
-public class MemberCommand_memberView implements MemberCommand{
+public class BoardCommand_edit implements BoardCommand{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			System.out.println(">>MemberCommand_memberView()");
-			MemberDao mdao = MemberDao.getInstance();
-			List<MemberDto> memberList = mdao.getMemberAll();
-			request.setAttribute("memberList", memberList);	
-			System.out.println("MemberCommand_memberView() end");
+			System.out.println(">>BoardCommand_edit");
+			
+			BoardDao dao = BoardDao.getInstance();
+			BoardDto board = dao.boardSearchByArtiNum(
+								Integer.parseInt(request.getParameter("artiNum"))
+							);
+			request.setAttribute("board", board);
+			System.out.println(">>BoardCommand_edit end");
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {

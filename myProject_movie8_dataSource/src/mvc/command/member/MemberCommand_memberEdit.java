@@ -3,8 +3,8 @@ package mvc.command.member;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mvc.db.dao.DaoMember;
-import mvc.db.dto.DtoMember;
+import mvc.db.dao.MemberDao;
+import mvc.db.dto.MemberDto;
 
 public class MemberCommand_memberEdit implements MemberCommand{
 
@@ -18,24 +18,24 @@ public class MemberCommand_memberEdit implements MemberCommand{
 				interest += st;
 			}
 			
-			DtoMember member = new DtoMember();
+			MemberDto member = new MemberDto();
 			member.setPassword(request.getParameter("pw"))
 				  .setName(request.getParameter("name"))
 				  .setEmail(request.getParameter("email"))
 				  .setBirthyear(Integer.parseInt(request.getParameter("birthyear")))
 				  .setGender(request.getParameter("gender"))
 				  .setInterest(interest);
-			DaoMember mdao = DaoMember.getInstance();
+			MemberDao mdao = MemberDao.getInstance();
 			String id = request.getParameter("id");
 			mdao.memberEdit(member, id);
 			
 			System.out.println("MemberCommand_memberEdit() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
-			sqle.getMessage();
+			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

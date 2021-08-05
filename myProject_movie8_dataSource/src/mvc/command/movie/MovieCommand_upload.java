@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import mvc.db.dao.DaoMovie;
-import mvc.db.dto.DtoMovie;
+import mvc.db.dao.MovieDao;
+import mvc.db.dto.MovieDto;
 
 public class MovieCommand_upload implements MovieCommand{
 	@Override
@@ -18,14 +18,14 @@ public class MovieCommand_upload implements MovieCommand{
 			/*-----------------------------------------------------------------
 				upload image file from <form> by using "MultipartRequest"
 			-----------------------------------------------------------------*/
-			String savePath = "D:/Programming/workspace/dynamicWebProject/myProject_movie6_board/WebContent/resources/images/movie";
+			String savePath = "D:/Programming/workspace/dynamicWebProject/myProject_movie7_dbConnectionPool/WebContent/resources/images/movie";
 			int fileLimit = 1000*1024*1024;
 			MultipartRequest multi = new MultipartRequest( request, savePath, fileLimit, "UTF-8", new DefaultFileRenamePolicy() );
 			
 			Enumeration<?> files	= multi.getFileNames();
 			String fName			= (String) files.nextElement();
 			String moviePoster		= multi.getFilesystemName(fName);
-			DtoMovie movie			= new DtoMovie();
+			MovieDto movie			= new MovieDto();
 			
 			int movieCode = Integer.parseInt(multi.getParameter("movieCode"));
 				
@@ -42,18 +42,22 @@ public class MovieCommand_upload implements MovieCommand{
 				 .setIsActive("y");
 			request.setAttribute("movie", movie);
 
-			DaoMovie mdao = DaoMovie.getInstance();
+			MovieDao mdao = MovieDao.getInstance();
 			mdao.movieUpload(movie);
 			
 			request.setAttribute("movieCode", movieCode);
-			System.out.println("MovieCommand_upload() - end");
+			System.out.println("MovieCommand_upload() end");
 		} catch (NullPointerException npe) {
+			System.out.println("NullPointerException");
 			npe.getMessage();
 		} catch (IOException ioe) {
+			System.out.println("IOException");
 			ioe.getMessage();
 		} catch (ClassNotFoundException cnfe) {
+			System.out.println("ClassNotFoundException");
 			cnfe.getMessage();
 		} catch (SQLException sqle) {
+			System.out.println("SQLException");
 			sqle.getMessage();
 		} catch (Exception e) {
 			e.printStackTrace();

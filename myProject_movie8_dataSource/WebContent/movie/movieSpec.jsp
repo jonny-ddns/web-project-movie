@@ -1,8 +1,8 @@
-<%@page import="mvc.db.dto.DtoMovie"%>
+<%@page import="mvc.db.dto.MovieDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>movieSpec.jsp");
-	DtoMovie movie = (DtoMovie) request.getAttribute("movie");
+	MovieDto movie = (MovieDto) request.getAttribute("movie");
 	String contextPath = request.getContextPath();
 
 	int movieCode	= movie.getMovieCode();

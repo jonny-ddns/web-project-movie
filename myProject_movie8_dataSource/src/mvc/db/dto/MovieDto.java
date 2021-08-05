@@ -2,7 +2,7 @@ package mvc.db.dto;
 
 import java.util.Date;
 
-public class DtoMovie {
+public class MovieDto {
 	private int movieCode;
 	private String title;
 	private String director;
@@ -19,84 +19,84 @@ public class DtoMovie {
 	public int getMovieCode() {
 		return movieCode;
 	}
-	public DtoMovie setMovieCode(int movieCode) {
+	public MovieDto setMovieCode(int movieCode) {
 		this.movieCode = movieCode;
 		return this;
 	}
 	public String getTitle() {
 		return title;
 	}
-	public DtoMovie setTitle(String title) {
+	public MovieDto setTitle(String title) {
 		this.title = title;
 		return this;
 	}
 	public String getDirector() {
 		return director;
 	}
-	public DtoMovie setDirector(String director) {
+	public MovieDto setDirector(String director) {
 		this.director = director;
 		return this;
 	}
 	public String getActors() {
 		return actors;
 	}
-	public DtoMovie setActors(String actors) {
+	public MovieDto setActors(String actors) {
 		this.actors = actors;
 		return this;
 	}
 	public String getGenre() {
 		return genre;
 	}
-	public DtoMovie setGenre(String genre) {
+	public MovieDto setGenre(String genre) {
 		this.genre = genre;
 		return this;
 	}
 	public String getContent() {
 		return content;
 	}
-	public DtoMovie setContent(String content) {
+	public MovieDto setContent(String content) {
 		this.content = content;
 		return this;
 	}
 	public int getRunningTime() {
 		return runningTime;
 	}
-	public DtoMovie setRunningTime(int runningTime) {
+	public MovieDto setRunningTime(int runningTime) {
 		this.runningTime = runningTime;
 		return this;
 	}
 	public String getRating() {
 		return rating;
 	}
-	public DtoMovie setRating(String rating) {
+	public MovieDto setRating(String rating) {
 		this.rating = rating;
 		return this;
 	}
 	public int getScore() {
 		return score;
 	}
-	public DtoMovie setScore(int score) {
+	public MovieDto setScore(int score) {
 		this.score = score;
 		return this;
 	}
 	public String getMoviePoster() {
 		return moviePoster;
 	}
-	public DtoMovie setMoviePoster(String moviePoster) {
+	public MovieDto setMoviePoster(String moviePoster) {
 		this.moviePoster = moviePoster;
 		return this;
 	}	
 	public Date getRegisterDate() {
 		return registerDate;
 	}
-	public DtoMovie setRegisterDate(Date registerDate) {
+	public MovieDto setRegisterDate(Date registerDate) {
 		this.registerDate = registerDate;
 		return this;
 	}
 	public String getIsActive() {
 		return isActive;
 	}
-	public DtoMovie setIsActive(String isActive) {
+	public MovieDto setIsActive(String isActive) {
 		this.isActive = isActive;
 		return this;
 	}

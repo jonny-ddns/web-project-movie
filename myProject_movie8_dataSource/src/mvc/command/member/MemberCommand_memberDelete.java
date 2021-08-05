@@ -3,7 +3,7 @@ package mvc.command.member;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mvc.db.dao.DaoMember;
+import mvc.db.dao.MemberDao;
 
 public class MemberCommand_memberDelete implements MemberCommand{
 	@Override
@@ -11,15 +11,15 @@ public class MemberCommand_memberDelete implements MemberCommand{
 		try {
 			System.out.println(">>MemberCommand_memberDelete()");	
 			String id = request.getParameter("id");
-			DaoMember mdao = DaoMember.getInstance();
+			MemberDao mdao = MemberDao.getInstance();
 			mdao.memberDelete(id);
 			System.out.println("MemberCommand_memberDelete() end");
 		} catch (NullPointerException npe) {
-			npe.getMessage();
+			npe.printStackTrace();
 		} catch (ClassNotFoundException cnfe) {
-			cnfe.getMessage();
+			cnfe.printStackTrace();
 		} catch (SQLException sqle) {
-			sqle.getMessage();
+			sqle.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

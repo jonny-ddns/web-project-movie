@@ -6,5 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 public class BoardCommand_delete implements BoardCommand{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println(">>BoardCommand_delete");
+		
+		System.out.println("BoardCommand_delete end");
 	}
 }

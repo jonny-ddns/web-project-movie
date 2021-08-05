@@ -1,20 +1,30 @@
-<%@page import="mvc.db.dto.DtoBoard"%>
+<%@page import="mvc.db.dto.MemberDto"%>
+<%@page import="mvc.db.dto.BoardDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println(">>boardRead.jsp");
-	DtoBoard board = (DtoBoard) request.getAttribute("board");
+
+	BoardDto board = (BoardDto) request.getAttribute("board");
 	int artiNum = board.getArtiNum();
-	String artiDate = board.getArtiDate();
+	String artiDate = board.getWriteDate();
 	String artiTitle = board.getArtiTitle();
 	String content = board.getContent();
 	String writer = board.getWriter();
+
+	MemberDto member = null;
+	boolean isWriter = false;
+	if(session.getAttribute("memberLogin") != null){
+		member = (MemberDto) session.getAttribute("memberLogin");
+		if(member.getId().equals(writer)){
+			isWriter = true;
+		}	
+	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>board read</title>
-
 <style>
 	h1{
 		text-align: center;
@@ -49,8 +59,7 @@
 	}
 	#th_writer{
 	 	text-align: left;
-	 	padding-left: 10px;
-	
+	 	padding-left: 10px;	
 	}
 	#th_artiDate{
 		text-align: right;
@@ -60,17 +69,23 @@
 	.tr_content{
 		height: 200px;
 	}
-	
-
 </style>
-
 </head>
 <body>
 	<h1>board read</h1>
 	<div class="div_button">
-		<a href="./edit.co?artiNum='<%= artiNum %>'">수정</a>&emsp;&emsp;
-		<a href="./delete.co?artiNum='<%= artiNum %>'">삭제</a>
+	<% 
+		if(isWriter){ 
+	%>	
+			<form action="./edit.co" method="post">
+				<input type="hidden" name="artiNum" value="<%= artiNum %>">
+				<input type="submit" value="수정">
+			</form>
+	<%
+		} 
+	%>
 	</div>
+	<!-- 게시글 -->
 	<table>
 		<tr>
 			<th class="tr_header" id="th_title">TITLE</th>
@@ -82,8 +97,16 @@
 			<td class="tr_body" id="th_artiDate"><%= artiDate %></td>
 		</tr>
 		<tr>
-			<td class="tr_content" colspan="3 "><%= content %></td>
+			<td class="tr_content" colspan="3"><%= content %></td>
 		</tr>
-	</table>	
+	</table>
+	
+	<!-- 댓글 창 -->
+	<h1>댓글s</h1>
+	<table>
+		
+		
+	
+	</table>
 </body>
 </html>	
